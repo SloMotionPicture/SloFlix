@@ -1,4 +1,16 @@
-# Boilermaker
+# SLOFlix
+
+Group Contract:
+https://docs.google.com/document/d/1Bk7kgcgE2k_LFchEiioSNneZ36KFjr_KgG_TqqBn9Qg/edit?usp=sharing
+
+Specs:
+https://docs.google.com/document/d/1uCDHARWDkNXOLbcDrfuTJMso0p1PvQY_iRpKo_Kvjww/edit
+
+DB Schema:
+https://docs.google.com/drawings/d/1E2JTNoVz1mHWHJb-lIQ8EXkLebfK4TNjnTvfMidRG64/edit?usp=sharing
+
+Basic Wireframe:
+https://xd.adobe.com/spec/72a38529-3ca1-4e84-6553-f104f006d630-0492/
 
 _Good things come in pairs_
 
