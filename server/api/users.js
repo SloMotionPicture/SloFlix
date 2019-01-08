@@ -2,6 +2,8 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
 
+
+//Find All Users
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -13,5 +15,16 @@ router.get('/', async (req, res, next) => {
     res.json(users)
   } catch (err) {
     next(err)
+  }
+})
+
+//Find One User
+router.get('/:id', async (req,res,next)=>{
+  try{
+    const user = await User.findOne({where:{
+      id:req.params.id}})
+    res.send(user)
+  } catch(error){
+    next(error)
   }
 })
