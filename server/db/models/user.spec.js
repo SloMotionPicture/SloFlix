@@ -2,7 +2,7 @@
 
 const {expect} = require('chai')
 const db = require('../index')
-const User = db.model('user')
+const User = db.model('users')
 
 describe('User model', () => {
   beforeEach(() => {
