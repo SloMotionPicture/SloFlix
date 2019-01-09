@@ -2,9 +2,24 @@ const scrapeIt = require('scrape-it')
 let baseURL =
   'https://www.imdb.com/list/ls057823854/?sort=list_order,asc&st_dt=&mode=detail&page=1'
 
-//module.export = async function (){
-async function start() {
+// To use; import this file into the seed file and call the imported function. A 'for' loop that creates a stream of data will need to be created, when the below function returns the list of 100 movies those movies should start being added to the database, while those movies are being added to the database a new scraping function should be started, when the next 100 movies are returned they should be concatenated onto the end of the array that is initially returned. This will hopefully speed up the seeding process which will be long, be patient.
+
+module.export = async function() {
+  return await scrapedData()
+}
+
+//For test. Run 'node script/scraping' to run file
+const starting = async () => {
+  const movies = await scrapedData()
+  console.log(movies)
+}
+starting()
+
+//Where the magic happens, this function scrapes movie data from IMDB, formats, and returns an array of 100 movies
+async function scrapedData() {
   const fetchMovies = async () => {
+    //Implementation of the scrape-it node module
+    //The scrapeIt function requires a url, the structure of the data that you want back and a callback function
     return scrapeIt(
       baseURL,
       {
@@ -28,6 +43,7 @@ async function start() {
           }
         }
       },
+      // Callback
       (err, data) => {
         if (err) {
           console.log(err)
@@ -36,7 +52,7 @@ async function start() {
       }
     )
   }
-
+  // Try scraping movies from IMDB and catch any errors
   try {
     tick(true)()
     const raw = await fetchMovies()
@@ -51,6 +67,7 @@ async function start() {
   }
 }
 
+// Visual feedback so you don't think you're crazy for this process taking so long
 const tick = start => {
   return function(response) {
     let logger = []
@@ -86,6 +103,9 @@ const formatRawData = movies => {
     if (movie.tags[0] !== undefined) {
       movie.tags = movie.tags[0].split(',')
     }
+    // Custom formatting of the 'raw' data scrape-it returns
+    // Minor problems with data formatting should be ironed out by hand in the database
+    // Should be refactored if too many problems with the data occur
     let arr = movie.summary.split('\n')
     let director = []
     let actors = []
@@ -129,9 +149,3 @@ const formatRawData = movies => {
   })
   return movies
 }
-const starting = async () => {
-  const movies = await start()
-  console.log(movies)
-}
-
-starting()
