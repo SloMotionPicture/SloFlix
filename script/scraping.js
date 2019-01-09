@@ -5,7 +5,7 @@ let movies = require('./sample_Movie_Object').data.movies
 let url = 'https://www.imdb.com/list/ls057823854/'
 console.log('STARTING')
 
-let firstMovie = movies[9]
+let firstMovie = movies[0]
 firstMovie.tags = firstMovie.tags[0].split(',')
 let arr = firstMovie.description.split('\n')
 console.log(arr)
@@ -14,16 +14,34 @@ let director = []
 let actors = []
 let index = 9
 while (arr[index] !== '                 | ') {
-  director.push(arr[index])
+  let currentDirector = arr[index]
+  const commaindex = currentDirector.indexOf(',')
+  if (commaindex !== -1) {
+    const actual = currentDirector.slice(0, commaindex)
+    director.push(actual)
+  } else {
+    director.push(currentDirector)
+  }
   index++
 }
 index++
 index++
 while (arr[index] !== '    ') {
-  actors.push(arr[index])
+  let currentActor = arr[index]
+  const commaindex = currentActor.indexOf(',')
+  if (commaindex !== -1) {
+    const actual = currentActor.slice(0, commaindex)
+    actors.push(actual)
+  } else {
+    actors.push(currentActor)
+  }
   index++
 }
-console.log('HERE', director, actors)
+firstMovie.description = description
+firstMovie.actors = actors
+firstMovie.director = director
+console.log('HERE', firstMovie)
+
 // scrapeIt(url, {
 //   movies: {
 //     listItem: ".lister-item",
