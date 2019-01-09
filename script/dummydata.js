@@ -201,3 +201,10 @@ const transactionData = [
     date: '2018-08-09 02:02:02'
   }
 ]
+
+module.exports = {
+  userData,
+  movieData,
+  tagData,
+  transactionData
+}

@@ -41,15 +41,15 @@ const Movie = db.define('movies', {
     }
   },
   rentPrice: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     allowNull: false
   },
   digitalPrice: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     allowNull: false
   },
   physicalPrice: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     allowNull: false
   }
 })

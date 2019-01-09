@@ -2,17 +2,30 @@
 
 const db = require('../server/db')
 const {User} = require('../server/db/models')
+const {Movie} = require('../server/db/models')
+const {Tag} = require('../server/db/models')
+const {Transaction} = require('../server/db/models')
+const {userData, movieData, tagData, transactionData} = require('./dummydata')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  console.log('starting to seed')
 
-  console.log(`seeded ${users.length} users`)
+  for (const user of userData) {
+    await User.create(user)
+  }
+  for (const movie of movieData) {
+    await Movie.create(movie)
+  }
+  for (const tag of tagData) {
+    await Tag.create(tag)
+  }
+  for (const transaction of transactionData) {
+    await Transaction.create(transaction)
+  }
+
   console.log(`seeded successfully`)
 }
 
@@ -42,3 +55,12 @@ if (module === require.main) {
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed
+
+//  Code that was featured in Boilermaker  -- not ready to abandon, yet
+
+// const users = await Promise.all([
+//   User.create({email: 'cody@email.com', password: '123'}),
+//   User.create({email: 'murphy@email.com', password: '123'})
+// ])
+
+//console.log(`seeded ${users.length} users`)
