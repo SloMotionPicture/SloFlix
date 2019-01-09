@@ -80,7 +80,39 @@ form div {
 }
 .content {
   background-color: white;
-  float: left;
+
+  display: inline-block;
   width: 80%;
   height: 80vh;
+}
+.movie_View {
+  margin-top: 0px;
+  background-color: #f2f2f2;
+  display: inline-block;
+  width: 70%;
+  height: 100%;
+}
+.movie_View > table {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.movie_View > table > tr {
+  background-color: grey;
+  width: 130px;
+  height: 200px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.movie_View > table > tr > img {
+  justify-content: center;
+  width: 120px;
+  height: 176px;
+}
+.ad_View {
+  margin-left: 10px;
+  display: inline-block;
+  background-color: black;
+  width: 27%;
+  height: 100%;
 }
