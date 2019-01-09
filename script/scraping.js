@@ -1,13 +1,12 @@
-const cheerio = require('cheerio')
-const request = require('request')
 const scrapeIt = require('scrape-it')
-let url =
+let baseURL =
   'https://www.imdb.com/list/ls057823854/?sort=list_order,asc&st_dt=&mode=detail&page=94'
-const start = async () => {
+
+//module.export = async function (){
+async function start() {
   const fetchMovies = async () => {
-    console.log('...STARTING...')
     return scrapeIt(
-      url,
+      baseURL,
       {
         movies: {
           listItem: '.lister-item',
@@ -30,19 +29,64 @@ const start = async () => {
         }
       },
       (err, data) => {
-        console.log(err || 'SUCCESS')
+        if (err) {
+          console.log(err)
+        }
         return data
       }
     )
   }
-  let data = await fetchMovies()
-  let movies = data.data.movies
+
+  try {
+    tick(true)()
+    const raw = await fetchMovies()
+    const movies = formatRawData(raw.data.movies)
+    const response = 'Success!' + movies
+    tick(false)(response)
+    return movies
+  } catch (err) {
+    const response = 'Error: ' + err
+    tick(false)(response)
+    return response
+  }
+}
+
+const tick = start => {
+  return function(response) {
+    let logger = []
+    let forward = true
+    const decremementTheIncremement = () => {
+      if (forward) {
+        logger.push('.')
+      } else {
+        logger.pop()
+      }
+    }
+    if (start === true) {
+      console.log('...STARTING...')
+      this.interval = setInterval(function() {
+        if (logger.length === 5) {
+          forward = false
+        }
+        if (logger.length === 1) {
+          forward = true
+        }
+        decremementTheIncremement()
+        console.log(logger.join(''))
+      }, 800)
+    } else {
+      clearInterval(this.interval)
+      this.interval = null
+      console.log(response)
+    }
+  }
+}
+const formatRawData = movies => {
   movies.map(movie => {
     if (movie.tags[0] !== undefined) {
       movie.tags = movie.tags[0].split(',')
     }
     let arr = movie.summary.split('\n')
-    const summary = arr[7]
     let director = []
     let actors = []
     let index = 9
@@ -78,12 +122,11 @@ const start = async () => {
         break
       }
     }
-    movie.summary = summary
+    movie.summary = arr[7]
     movie.cast = actors
     movie.director = director
     return movie
   })
-  console.log(movies)
   return movies
 }
 
