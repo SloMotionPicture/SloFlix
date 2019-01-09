@@ -1,10 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
-const {Movie} = require('../server/db/models')
-const {Tag} = require('../server/db/models')
-const {Transaction} = require('../server/db/models')
+const {User, Movie, Tag, Transaction} = require('../server/db/models')
 const {userData, movieData, tagData, transactionData} = require('./dummydata')
 
 async function seed() {
