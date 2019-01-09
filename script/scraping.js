@@ -1,6 +1,6 @@
 const scrapeIt = require('scrape-it')
 let baseURL =
-  'https://www.imdb.com/list/ls057823854/?sort=list_order,asc&st_dt=&mode=detail&page=94'
+  'https://www.imdb.com/list/ls057823854/?sort=list_order,asc&st_dt=&mode=detail&page=1'
 
 //module.export = async function (){
 async function start() {
@@ -40,8 +40,8 @@ async function start() {
   try {
     tick(true)()
     const raw = await fetchMovies()
-    const movies = await Promise.all(formatRawData(raw.data.movies))
-    const response = 'Success!' + JSON.stringify(movies)
+    const movies = formatRawData(raw.data.movies)
+    const response = 'Success!'
     tick(false)(response)
     return movies
   } catch (err) {
@@ -81,7 +81,7 @@ const tick = start => {
     }
   }
 }
-const formatRawData = async movies => {
+const formatRawData = movies => {
   movies.map(movie => {
     if (movie.tags[0] !== undefined) {
       movie.tags = movie.tags[0].split(',')
@@ -129,5 +129,9 @@ const formatRawData = async movies => {
   })
   return movies
 }
-// const movies = await start()
-// console.log(movies)
+const starting = async () => {
+  const movies = await start()
+  console.log(movies)
+}
+
+starting()
