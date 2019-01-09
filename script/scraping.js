@@ -40,12 +40,12 @@ async function start() {
   try {
     tick(true)()
     const raw = await fetchMovies()
-    const movies = formatRawData(raw.data.movies)
-    const response = 'Success!' + movies
+    const movies = await Promise.all(formatRawData(raw.data.movies))
+    const response = 'Success!' + JSON.stringify(movies)
     tick(false)(response)
     return movies
   } catch (err) {
-    const response = 'Error: ' + err
+    const response = 'Error: ' + JSON.stringify(err)
     tick(false)(response)
     return response
   }
@@ -81,7 +81,7 @@ const tick = start => {
     }
   }
 }
-const formatRawData = movies => {
+const formatRawData = async movies => {
   movies.map(movie => {
     if (movie.tags[0] !== undefined) {
       movie.tags = movie.tags[0].split(',')
@@ -129,5 +129,5 @@ const formatRawData = movies => {
   })
   return movies
 }
-
-start()
+// const movies = await start()
+// console.log(movies)
