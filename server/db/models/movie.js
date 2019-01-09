@@ -19,7 +19,7 @@ const Movie = db.define('movies', {
   cast: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
-  tags: {
+  tag: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
   summary: {
