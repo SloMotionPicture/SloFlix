@@ -4,5 +4,10 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
+export {default as SearchBar} from './SearchBar'
 export {default as UserHome} from './user-home'
+export {default as LeftSideBar} from './LeftSideBar'
+export {default as MovieView} from './MovieView'
+export {default as Content} from './Content'
+export {default as AdView} from './AdView'
 export {Login, Signup} from './auth-form'

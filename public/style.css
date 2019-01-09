@@ -1,4 +1,9 @@
+html,
 body {
+  margin-top: 0px;
+  margin: 0 auto;
+  height: 100vh;
+  width: 100vw;
   font-family: sans-serif;
 }
 
@@ -10,12 +15,104 @@ label {
   display: block;
 }
 
-nav a {
+/* nav a {
   display: inline-block;
   margin: 1em;
-}
+} */
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.navBar {
+  margin-top: 0px;
+  background-color: #3e3e3e;
+  width: 100vw;
+  height: 13vh;
+}
+.navBar > a > h1 {
+  color: white;
+}
+.search_Bar {
+  background-color: #f2f2f2;
+  width: 100vw;
+  height: 7vh;
+}
+.search_Bar > div {
+  float: right;
+}
+.search_Bar > div > a {
+  margin-right: 20px;
+  background-color: #0099ff;
+  color: white;
+  text-align: center;
+  width: 80px;
+  height: 25px;
+}
+.search_Bar > form > input {
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 300px;
+  height: 25px;
+}
+.search_Bar > form > select {
+  height: 25px;
+  width: 100px;
+  border-radius: 0px;
+}
+.left_Bar {
+  background-color: #d9d9d9;
+  float: left;
+  width: 20%;
+  height: 80vh;
+}
+.left_Bar > table {
+  display: block;
+}
+.left_Bar > h2 {
+  margin-top: 10px;
+  text-align: center;
+}
+.left_Bar > table > tr > a {
+  color: #4d4d4d;
+  margin-bottom: 50px;
+}
+.content {
+  background-color: white;
+
+  display: inline-block;
+  width: 80%;
+  height: 80vh;
+}
+.movie_View {
+  margin-top: 0px;
+  background-color: #f2f2f2;
+  display: inline-block;
+  width: 70%;
+  height: 100%;
+}
+.movie_View > table {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.movie_View > table > tr {
+  background-color: grey;
+  width: 130px;
+  height: 200px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.movie_View > table > tr > img {
+  justify-content: center;
+  width: 120px;
+  height: 176px;
+}
+.ad_View {
+  margin-left: 10px;
+  display: inline-block;
+  background-color: black;
+  width: 27%;
+  height: 100%;
 }
