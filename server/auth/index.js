@@ -33,7 +33,6 @@ router.post('/signup', async (req, res, next) => {
 })
 
 router.delete('/logout', (req, res) => {
-  console.log('LOGOUT>>>>>>>>>>>')
   req.logout()
   req.session.destroy()
   res.status(204).end()
