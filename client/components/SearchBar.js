@@ -29,8 +29,12 @@ const SearchBar = ({didChange, didSubmit, handleClick, isLoggedIn}) => (
     ) : (
       <div>
         {/* The navbar will show these links before you log in */}
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign Up</Link>
+        <Link className="login" to="/login">
+          Login
+        </Link>
+        <Link className="signUp" to="/signup">
+          Sign Up
+        </Link>
       </div>
     )}
   </div>

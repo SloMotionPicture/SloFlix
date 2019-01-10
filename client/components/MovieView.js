@@ -14,15 +14,16 @@ class MovieView extends Component {
     return (
       <div className="movie_View">
         <table>
-          {movieData.map(movie => {
-            console.log('FIRED', movie)
-            return (
-              <tr>
-                {/* <img src={movie.imageUrl} />
-                <label>{movie.title} </label> */}
-              </tr>
-            )
-          })}
+          <tbody>
+            {movieData.map(movie => {
+              return (
+                <tr>
+                  <img src={movie.imageUrl} />
+                  <label>{movie.title} </label>
+                </tr>
+              )
+            })}
+          </tbody>
         </table>
       </div>
     )
