@@ -13,7 +13,7 @@ const defaultSingleMovie = {}
 /**
  * ACTION CREATORS
  */
-const getSingleMovie = movie => ({type: GET_SINGLE_MOVIE, movie})
+export const getSingleMovie = movie => ({type: GET_SINGLE_MOVIE, movie})
 
 /**
  * THUNK CREATORS
