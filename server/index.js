@@ -70,13 +70,7 @@ const createApp = () => {
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
-  app.use((req, res, next) => {
-    if (!req.session.counter) req.session.counter = 1
-    else req.session.counter++
-    console.log('FIRED>>>>>>>>>', req.session.counter)
-    console.log(req.session)
-    next()
-  })
+
   // any remaining requests with an extension (.js, .css, etc.) send 404
   app.use((req, res, next) => {
     if (path.extname(req.path).length) {

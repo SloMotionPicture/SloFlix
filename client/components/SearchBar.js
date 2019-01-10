@@ -51,7 +51,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    handleLogout: () => logout(dispatch)
+    handleLogout: () => dispatch(logout())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)

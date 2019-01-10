@@ -30,10 +30,10 @@ export const me = () => async dispatch => {
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (email, password, method, usersName) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post(`/auth/${method}`, {email, password, usersName})
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
@@ -46,9 +46,8 @@ export const auth = (email, password, method) => async dispatch => {
   }
 }
 
-export const logout = async dispatch => {
+export const logout = () => async dispatch => {
   try {
-    console.log('<<<<<<<<<<<<<INSIDE')
     await axios.delete('/auth/logout')
     dispatch(removeUser())
     history.push('/login')
