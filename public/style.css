@@ -43,6 +43,7 @@ form div {
   float: right;
 }
 .search_Bar > div > a {
+  margin-top: -10px;
   margin-right: 20px;
   background-color: #0099ff;
   color: white;
@@ -86,26 +87,30 @@ form div {
   height: 80vh;
 }
 .movie_View {
+  padding-top: 0px;
   margin-top: 0px;
   background-color: #f2f2f2;
   display: inline-block;
   width: 70%;
   height: 100%;
 }
-.movie_View > table {
+.movie_View > table > tbody {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
 }
-.movie_View > table > tr {
+.movie_View > table > tbody > tr {
+  justify-content: center;
+  text-align: center;
   background-color: grey;
   width: 130px;
-  height: 200px;
+  height: 210px;
   margin-top: 10px;
   margin-right: 10px;
 }
-.movie_View > table > tr > img {
+.movie_View > table > tbody > tr > img {
   justify-content: center;
+  margin-top: 5px;
   width: 120px;
   height: 176px;
 }
