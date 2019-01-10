@@ -5,22 +5,44 @@ module.exports = router
 //Finds All Transactions
 router.get('/', async (req, res, next) => {
   try {
-    const allTransactions = await Transaction.findAll()
-    res.send(allTransactions)
+    let query = ''
+    if (!req.user.adminStatus) {
+      query = req.user.id
+    } else {
+      query = 'admin'
+    }
+    if (query === 'admin') {
+      const allTransactions = await Transaction.findAll()
+      res.send(allTransactions)
+    } else {
+      const userTransactions = await Transaction.findAll({
+        where: {userId: req.user.id}
+      })
+      res.send(userTransactions)
+    }
   } catch (error) {
     next(error)
   }
 })
 
 //Find User Transactions
-router.get('/:userId', async (req, res, next) => {
+router.get('/:transactionId', async (req, res, next) => {
   try {
-    const userTrasactions = await Transaction.findAll({
-      where: {
-        userId: req.params.userId
-      }
-    })
-    res.send(userTrasactions)
+    let query = ''
+    if (!req.user.adminStatus) {
+      query = req.user.id
+    } else {
+      query = 'admin'
+    }
+    const userTransaction = await Transaction.findById(req.params.transactionId)
+    if (
+      userTransaction &&
+      (query === 'admin' || query === userTransaction.userId)
+    ) {
+      res.send(userTransaction)
+    } else {
+      res.sendStatus(404)
+    }
   } catch (error) {
     next(error)
   }
