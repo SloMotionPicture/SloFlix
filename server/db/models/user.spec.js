@@ -1,5 +1,7 @@
 /* global describe beforeEach it */
 
+// OB/MS: delete this file
+
 const {expect} = require('chai')
 const db = require('../index')
 const User = db.model('users')

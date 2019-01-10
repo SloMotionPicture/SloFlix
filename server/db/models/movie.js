@@ -19,6 +19,8 @@ const Movie = db.define('movies', {
   cast: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
+  // OB/MS: could use an s ("tags")
+  // OB/MS: direct association instead sounds more useful
   tag: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
@@ -40,6 +42,8 @@ const Movie = db.define('movies', {
       notEmpty: true
     }
   },
+  // OB/MS: it's considered best practice to use integer for currency data because of floating point math, and measure in pennies
+  // OB/MS: maybe allowNull should be true so that you could determine (for example) if a movie has no physical copy
   rentPrice: {
     type: Sequelize.FLOAT,
     allowNull: false

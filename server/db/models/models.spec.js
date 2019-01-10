@@ -68,6 +68,7 @@ describe('Tag model', () => {
       tag3 = await Tag.create(tagData[10])
     })
 
+    // OB/MS: this more tests the sequelize library than your code, instead maybe flip this to be a "validation" test (provide either valid or invalid data and confirm it fails or succeeds)
     it('we get the correct name for the tag tested', () => {
       expect(tag1.name).to.be.equal('Hello')
     })

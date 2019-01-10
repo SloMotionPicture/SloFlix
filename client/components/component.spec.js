@@ -22,6 +22,7 @@ describe('Components', () => {
     )
   })
 
+  // OB/MS: dead code
   it('renders a movie title', () => {
     expect('testing').to.not.equal('testing')
   })

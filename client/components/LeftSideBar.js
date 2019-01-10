@@ -30,6 +30,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
+    // OB/MS: remove commented out code
     //fetchTags: ()=>fetchAllTags(dispatch)
   }
 }

@@ -24,6 +24,7 @@ export const fetchMovies = () => async dispatch => {
     const action = getMovies(response.data)
     dispatch(action)
   } catch (err) {
+    // OB/MS: good that you are thinking about error handling, go further and report errors to the end user, maybe make a "toast" notification, like with this library: https://tomchentw.github.io/react-toastr/
     console.error(err)
   }
 }

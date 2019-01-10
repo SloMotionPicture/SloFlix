@@ -42,6 +42,7 @@ const SearchBar = ({didChange, didSubmit, handleClick, isLoggedIn}) => (
 
 export default SearchBar
 
+// OB/MS: prop types (is different than default props) is for warning other developers that use this component when they don't use it correctly (especially useful for heavily reused components)
 SearchBar.propTypes = {
   searchValue: '',
   didChange: event => {

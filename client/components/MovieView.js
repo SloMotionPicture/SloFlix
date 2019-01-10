@@ -5,11 +5,13 @@ import PropTypes from 'prop-types'
 import {movieData} from '../../script/dummydata'
 
 class MovieView extends Component {
+  // OB/MS: recommend removing unused code
   constructor(props) {
     super(props)
   }
   componentDidMount() {}
   render() {
+    // OB/MS: remove unnecessary logs
     console.log('RENDER')
     return (
       <div className="movie_View">
