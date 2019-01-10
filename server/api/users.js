@@ -19,13 +19,18 @@ router.get('/', async (req, res, next) => {
 
 //Find One User
 router.get('/:id', async (req, res, next) => {
+  console.log(req.user)
   try {
-    const user = await User.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-    res.json(user)
+    if (req.user.id == req.params.id || req.user.adminStatus) {
+      const user = await User.findOne({
+        where: {
+          id: req.params.id
+        }
+      })
+      res.json(user)
+    } else {
+      res.sendStatus(404)
+    }
   } catch (error) {
     next(error)
   }
