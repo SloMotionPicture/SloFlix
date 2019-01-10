@@ -4,7 +4,6 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_SINGLE_MOVIE = 'GET_SINGLE_MOVIE'
-
 /**
  * INITIAL STATE
  */
@@ -25,6 +24,13 @@ export const fetchOneMovie = id => async dispatch => {
     dispatch(action)
   } catch (err) {
     console.error(err)
+  }
+}
+export const addMovieToCart = async movieId => {
+  try {
+    const response = await axios.post(`/api/movies/addToCart/${movieId}`)
+  } catch (err) {
+    console.log(err)
   }
 }
 

@@ -3,13 +3,11 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {movieData} from '../../script/dummydata'
-
+import {addMovieToCart} from '../store/singleMovie'
 class MovieView extends Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {}
   render() {
+    const {handleClick} = this.props
     console.log('RENDER')
     return (
       <div className="movie_View">
@@ -17,7 +15,7 @@ class MovieView extends Component {
           <tbody>
             {movieData.map(movie => {
               return (
-                <tr>
+                <tr onClick={() => handleClick(movie.id)}>
                   <img src={movie.imageUrl} />
                   <label>{movie.title} </label>
                 </tr>
@@ -33,6 +31,8 @@ const mapStateToProps = state => {
   return {}
 }
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    handleClick: movieId => addMovieToCart(movieId)
+  }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MovieView)
