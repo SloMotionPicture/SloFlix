@@ -13,7 +13,7 @@ const defaultMovies = []
 /**
  * ACTION CREATORS
  */
-const getMovies = movies => ({type: GET_MOVIES, movies})
+export const getMovies = movies => ({type: GET_MOVIES, movies})
 
 /**
  * THUNK CREATORS

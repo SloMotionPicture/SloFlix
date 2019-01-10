@@ -43,32 +43,32 @@ const User = db.define('users', {
   },
   phone: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   streetAddress: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notEmpty: true
     }
   },
   city: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notEmpty: true
     }
   },
   state: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notEmpty: true
     }
   },
   zipCode: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   adminStatus: {
     type: Sequelize.BOOLEAN,

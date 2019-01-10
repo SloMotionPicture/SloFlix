@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 /**
  * ACTION TYPES
  */
@@ -14,7 +13,7 @@ const defaultTags = []
 /**
  * ACTION CREATORS
  */
-const getTags = tags => ({
+export const getTags = tags => ({
   type: GET_TAGS,
   tags
 })
