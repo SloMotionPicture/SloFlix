@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import Navbar from './navbar'
+import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -11,40 +13,64 @@ const AuthForm = props => {
 
   return (
     <div>
+      <Navbar />
       <form onSubmit={handleSubmit} name={name}>
         {name === 'signup' ? (
-          <div>
-            <div>
-              <label htmlFor="firstName">
-                <small>First Name</small>
-              </label>
-              <input name="firstName" type="text" />
-            </div>
-            <div>
-              <label htmlFor="lastName">
-                <small>Last Name</small>
-              </label>
-              <input name="lastName" type="text" />
-            </div>
+          <div className="">
+            <img className="logo" />
+            <h3>Create Account</h3>
+            <form className="">
+              <div>
+                <label htmlFor="firstName">
+                  <small>First Name:</small>
+                </label>
+                <input name="firstName" type="text" />
+              </div>
+              <div>
+                <label htmlFor="lastName">
+                  <small>Last Name:</small>
+                </label>
+                <input name="lastName" type="text" />
+              </div>
+              {/* EMAIL */}
+              <div>
+                <label htmlFor="email">
+                  <small>Email:</small>
+                </label>
+                <input name="email" type="text" />
+              </div>
+              {/* Password */}
+              <div>
+                <label htmlFor="password">
+                  <small>Password:</small>
+                </label>
+                <input name="password" type="text" />
+              </div>
+              <div>
+                <button type="submit">Create your SLOFlix account</button>
+              </div>
+            </form>
+            <Link to="/login">Already have an account with SLOFLix?</Link>
           </div>
         ) : (
-          <div />
+          <div>
+            <div>
+              <label htmlFor="email">
+                <small>Email</small>
+              </label>
+              <input name="email" type="text" />
+            </div>
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input name="password" type="password" />
+            </div>
+            <div>
+              <button type="submit">{displayName}</button>
+            </div>
+          </div>
         )}
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
       <a href="/auth/google">{displayName} with Google</a>
