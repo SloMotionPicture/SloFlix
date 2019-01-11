@@ -10,11 +10,8 @@ const Transaction = db.define('transactions', {
       notEmpty: true
     }
   },
-  movies: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER)
-  },
-  date: {
-    type: Sequelize.DATE
+  status: {
+    type: Sequelize.ENUM('Pending', 'Closed', 'Fulfilled', 'Refunded')
   }
 })
 
