@@ -10,7 +10,7 @@ DB Schema:
 https://docs.google.com/drawings/d/1E2JTNoVz1mHWHJb-lIQ8EXkLebfK4TNjnTvfMidRG64/edit?usp=sharing
 
 Basic Wireframe:
-https://xd.adobe.com/spec/72a38529-3ca1-4e84-6553-f104f006d630-0492/
+https://xd.adobe.com/spec/458222bb-4346-4534-6320-56d51e1ea599-33b3/
 
 _Good things come in pairs_
 
