@@ -30,7 +30,7 @@ const Movie = db.define('movies', {
     }
   },
   year: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   rating: {
@@ -41,16 +41,16 @@ const Movie = db.define('movies', {
     }
   },
   rentPrice: {
-    type: Sequelize.FLOAT,
-    allowNull: false
+    type: Sequelize.INTEGER,
+    allowNull: true
   },
   digitalPrice: {
-    type: Sequelize.FLOAT,
-    allowNull: false
+    type: Sequelize.INTEGER,
+    allowNull: true
   },
   physicalPrice: {
-    type: Sequelize.FLOAT,
-    allowNull: false
+    type: Sequelize.INTEGER,
+    allowNull: true
   }
 })
 
