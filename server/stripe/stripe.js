@@ -139,12 +139,6 @@ const createTransactionObjectWithParams = (
   }
 }
 
-const chargeCardWithCardObject = card => {
-  console.log('...Starting...')
-  verifyCard(card)
-}
-chargeCardWithCardObject(tempCard)
-
 module.exports = {
   createTransactionObjectWithParams,
   createCardObjectWithParams,
