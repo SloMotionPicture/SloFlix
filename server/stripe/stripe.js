@@ -1,7 +1,18 @@
 const {tempCard, tempTransaction} = require('./tempObjects')
-const stripeAPIKey = 'sk_test_C922RGUbK9oVjCvy9iqwl9Mo'
+const stripeAPIKey = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
 const stripe = require('stripe')(stripeAPIKey)
 const uuid = require('uuidv4')
+/*
+  Work flow of this file is to create a card object using 'createCardObjectWithParams',
+  verify said card object with 'verifyCard', 'verifyCard' sends a card token id to 
+  the specified callback, the card token id should be stored for later use. 
+  When a user clicks the checkout button completing the purchase a transaction object 
+  must be obtained using 'createTransactionObjectWithParams', the returned transaction 
+  object can be sent to 'createChargeToCard' along with a callback, the callback for
+  'createChargeToCard' is called twice the first time sending the uuid/ idempotency_key
+  and the second time sending the charge id back
+
+*/
 // Error handling
 const error = err => {
   switch (err.type) {
@@ -36,71 +47,110 @@ const error = err => {
   }
 }
 
+// Pass in a charge ID, returns a refund object
+const refund = charge => {
+  stripe.refunds.create(
+    {
+      charge
+    },
+    (err, refundObj) => {
+      if (err) {
+        error(err)
+      } else {
+        console.log('...Refunded...')
+      }
+    }
+  )
+}
+
 // idempotency_key is created by us and is used for when we don't retrieve a response from stripe and is used to recognize subsequent retries of the same request.
 // We suggest using V4 UUIDs, or another random string with enough entropy to avoid collisions
 // Returns a charge ID that should be stored in the database
-const createCharge = currentTempTransaction => {
+const createChargeToCard = (transaction, callback) => {
   console.log('...Creating Charge...')
   const tempUUID = uuid()
-  return stripe.charges.create(
-    currentTempTransaction,
+  callback(tempUUID)
+  stripe.charges.create(
+    transaction,
     {idempotency_key: tempUUID},
-    (err, charge) => {
+    (err, chargeObj) => {
       if (err) {
         error(err)
       } else {
         console.log('...Successful Charge...')
-        return charge
+        callback(chargeObj.id)
       }
     }
   )
 }
-// Returns a card token that can be sent to 'createCharge'
-const verifyCard = async (card = tempCard) => {
+
+// Provided a card object and a callback returns a card token id to said callback
+// whichcan be sent to 'createChargeToCard'
+const verifyCard = (card, callback) => {
   console.log('...Verifying Card...')
-  return await stripe.tokens.create({card}, (err, token) => {
+  stripe.tokens.create(
+    {
+      card
+    },
+    (err, cardToken) => {
+      if (err) {
+        error(err)
+      } else {
+        console.log('...Card Verified...')
+        callback(cardToken.id)
+      }
+    }
+  )
+}
+
+// Provided a cardTokenId and a callback returns a card token object to said callback
+const retrieveCard = (cardTokenId, callback) => {
+  stripe.tokens.retrieve(cardTokenId, (err, cardToken) => {
     if (err) {
       error(err)
     } else {
       console.log('...Card Verified...')
-      return token
+      callback(cardToken)
     }
   })
 }
-// Pass in a charge ID, returns a refund object
-const refund = charge => {
-  return stripe.refund.create(
-    {
-      charge
-    },
-    (err, refund) => {
-      if (err) {
-        error(err)
-      } else {
-        return refund
-      }
-    }
-  )
-}
-// Retrieves and returns a charge object from stripe
-const retrieve = stripeTransactionKey => {
-  stripe.charges.retrieve((stripeTransactionKey, {api: stripeAPIKey}))
+
+const createCardObjectWithParams = (number, exp_month, exp_year, cvc) => {
+  return {
+    number,
+    exp_month,
+    exp_year,
+    cvc
+  }
 }
 
-async function start() {
+const createTransactionObjectWithParams = (
+  amount,
+  source,
+  description,
+  metadata
+) => {
+  return {
+    amount,
+    description,
+    metadata,
+    source,
+    currency: 'usd'
+  }
+}
+
+const chargeCardWithCardObject = card => {
   console.log('...Starting...')
-  // tempCard = {
-  //   "number": '4242424242424242',
-  //   "exp_month": 12,
-  //   "exp_year": 2020,
-  //   "cvc": '123'
-  // }
-  const token = await verifyCard(tempCard)
-  const chargeObj = await createCharge({
-    ...tempTransaction,
-    source: token
-  })
-
-  console.log(chargeObj)
+  verifyCard(card)
 }
-start()
+chargeCardWithCardObject(tempCard)
+
+module.exports = {
+  createTransactionObjectWithParams,
+  createCardObjectWithParams,
+  chargeCardWithCardObject,
+  createChargeToCard,
+  retrieveCard,
+  verifyCard,
+  refund
+}

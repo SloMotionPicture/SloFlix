@@ -1,10 +1,18 @@
-let tempCard = {
+const tempCard = {
   number: '4242424242424242',
   exp_month: 12,
   exp_year: 2020,
   cvc: '123'
 }
-
+const tempTransaction = {
+  amount: 2000,
+  currency: 'usd',
+  source: 'card_1DrCnZ2eZvKYlo2CMuriCLpt',
+  description: 'Charge for jenny.rosen@example.com',
+  metadata: {
+    order_id: '6735'
+  }
+}
 const cardToken = {
   id: 'card_1DrCnZ2eZvKYlo2CMuriCLpt',
   object: 'card',
@@ -30,15 +38,7 @@ const cardToken = {
   name: null,
   tokenization_method: null
 }
-let tempTransaction = {
-  amount: 2000,
-  currency: 'usd',
-  source: cardToken,
-  description: 'Charge for jenny.rosen@example.com',
-  metadata: {
-    order_id: '6735'
-  }
-}
+
 //Example success response from 'stripe.charges.create'
 const exampleChargeResponse = {
   id: 'ch_1DpeX82eZvKYlo2CmYWVyOvp',
