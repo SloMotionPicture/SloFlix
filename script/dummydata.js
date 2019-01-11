@@ -200,43 +200,47 @@ const transactionData = [
 const TagMovieJoin = [
   {
     movieId: 1,
-    tagId: 2
+    tagId: 8
   },
   {
     movieId: 1,
-    tagId: 6
+    tagId: 1
   },
   {
     movieId: 2,
     tagId: 3
   },
   {
-    movieId: 3,
-    tagId: 4
-  },
-  {
-    movieId: 4,
+    movieId: 2,
     tagId: 1
   },
   {
+    movieId: 3,
+    tagId: 1
+  },
+  {
+    movieId: 3,
+    tagId: 2
+  },
+  {
+    movieId: 3,
+    tagId: 7
+  },
+  {
     movieId: 4,
-    tagId: 2
-  },
-  {
-    movieId: 5,
-    tagId: 2
-  },
-  {
-    movieId: 5,
-    tagId: 3
-  },
-  {
-    movieId: 5,
     tagId: 4
   },
   {
-    movieId: 5,
+    movieId: 4,
     tagId: 5
+  },
+  {
+    movieId: 4,
+    tagId: 6
+  },
+  {
+    movieId: 5,
+    tagId: 2
   }
 ]
 

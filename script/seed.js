@@ -32,14 +32,19 @@ async function seed() {
   for (const tag of tagData) {
     await Tag.create(tag)
   }
+
   for (const transaction of transactionData) {
     await Transaction.create(transaction)
   }
-  // for (const tag_movie of TagMovieJoin) {
-  //   await Tag-Movie-Join-Table.create(tag_movie)
-  // }
+
   for (const movieTransaction of movieTransactionJoinData) {
     await MovieTransaction.create(movieTransaction)
+  }
+
+  const TagMovie = db.model('Tag-Movie-Join-Table')
+
+  for (const tagmovie of TagMovieJoin) {
+    await TagMovie.create(tagmovie)
   }
 
   console.log(`seeded successfully`)
