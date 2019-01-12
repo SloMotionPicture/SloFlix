@@ -1,8 +1,21 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Movie, Tag, Transaction} = require('../server/db/models')
-const {userData, movieData, tagData, transactionData} = require('./dummydata')
+const {
+  User,
+  Movie,
+  Tag,
+  Transaction,
+  MovieTransaction
+} = require('../server/db/models')
+const {
+  userData,
+  movieData,
+  tagData,
+  transactionData,
+  TagMovieJoin,
+  movieTransactionJoinData
+} = require('./dummydata')
 
 async function seed() {
   await db.sync({force: true})
@@ -19,8 +32,19 @@ async function seed() {
   for (const tag of tagData) {
     await Tag.create(tag)
   }
+
   for (const transaction of transactionData) {
     await Transaction.create(transaction)
+  }
+
+  for (const movieTransaction of movieTransactionJoinData) {
+    await MovieTransaction.create(movieTransaction)
+  }
+
+  const TagMovie = db.model('Tag-Movie-Join-Table')
+
+  for (const tagmovie of TagMovieJoin) {
+    await TagMovie.create(tagmovie)
   }
 
   console.log(`seeded successfully`)
