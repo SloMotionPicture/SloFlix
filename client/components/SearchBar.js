@@ -22,6 +22,7 @@ const SearchBar = ({didChange, didSubmit, handleLogout, isLoggedIn}) => (
     </form>
     {isLoggedIn ? (
       <div>
+        <Link to="/cart">View Cart</Link>
         <Link to="/" onClick={handleLogout}>
           {' '}
           Logout{' '}
@@ -29,6 +30,7 @@ const SearchBar = ({didChange, didSubmit, handleLogout, isLoggedIn}) => (
       </div>
     ) : (
       <div>
+        <Link to="/cart">View Cart</Link>
         <Link className="login" to="/login">
           Login
         </Link>

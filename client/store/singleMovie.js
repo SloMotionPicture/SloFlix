@@ -17,15 +17,18 @@ export const getSingleMovie = movie => ({type: GET_SINGLE_MOVIE, movie})
 /**
  * THUNK CREATORS
  */
-export const fetchOneMovie = id => async dispatch => {
-  try {
-    const response = await axios.get(`/api/movies/${id}`)
-    const action = getSingleMovie(response.data)
-    dispatch(action)
-  } catch (err) {
-    console.error(err)
+export const fetchOneMovie = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/movies/${id}`)
+      const action = getSingleMovie(response.data)
+      dispatch(action)
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
+
 export const addMovieToCart = async movieId => {
   try {
     const response = await axios.post(`/api/movies/addToCart/${movieId}`)
