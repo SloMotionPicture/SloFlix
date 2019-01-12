@@ -19,9 +19,6 @@ const Movie = db.define('movies', {
   cast: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
-  tag: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
   summary: {
     type: Sequelize.TEXT,
     allowNull: false,
@@ -30,7 +27,7 @@ const Movie = db.define('movies', {
     }
   },
   year: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   rating: {
@@ -41,16 +38,16 @@ const Movie = db.define('movies', {
     }
   },
   rentPrice: {
-    type: Sequelize.FLOAT,
-    allowNull: false
+    type: Sequelize.INTEGER,
+    allowNull: true
   },
   digitalPrice: {
-    type: Sequelize.FLOAT,
-    allowNull: false
+    type: Sequelize.INTEGER,
+    allowNull: true
   },
   physicalPrice: {
-    type: Sequelize.FLOAT,
-    allowNull: false
+    type: Sequelize.INTEGER,
+    allowNull: true
   }
 })
 

@@ -2,6 +2,7 @@ const User = require('./user')
 const Movie = require('./movie')
 const Tag = require('./tag')
 const Transaction = require('./transaction')
+const MovieTransaction = require('./movieTransaction')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -20,11 +21,16 @@ const Transaction = require('./transaction')
 Transaction.belongsTo(User)
 User.hasMany(Transaction)
 
-Movie.hasMany(Tag)
+Movie.belongsToMany(Transaction, {through: 'MovieTransaction'})
+Transaction.belongsToMany(Movie, {through: 'MovieTransaction'})
+
+Movie.belongsToMany(Tag, {through: 'Tag-Movie-Join-Table'})
+Tag.belongsToMany(Movie, {through: 'Tag-Movie-Join-Table'})
 
 module.exports = {
   User,
   Tag,
   Movie,
-  Transaction
+  Transaction,
+  MovieTransaction
 }
