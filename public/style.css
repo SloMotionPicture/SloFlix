@@ -108,7 +108,10 @@ form div {
   margin-top: 10px;
   margin-right: 10px;
 }
-.movie_View > table > tbody > tr > img {
+.movie_View > table > tbody > tr > a > label {
+  color: black;
+}
+.movie_View > table > tbody > tr > a > img {
   justify-content: center;
   margin-top: 5px;
   width: 120px;

@@ -15,9 +15,11 @@ class MovieView extends Component {
           <tbody>
             {movieData.map(movie => {
               return (
-                <tr onClick={() => handleClick(movie.id)}>
-                  <img src={movie.imageUrl} />
-                  <label>{movie.title} </label>
+                <tr>
+                  <Link to={`/movie/${movie.id}`}>
+                    <img src={movie.imageUrl} />
+                    <label>{movie.title} </label>
+                  </Link>
                 </tr>
               )
             })}
