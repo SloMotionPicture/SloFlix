@@ -9,6 +9,13 @@ body {
 
 a {
   text-decoration: none;
+  /* justify-content: center;
+  text-align: center;
+  margin: 0 auto; */
+}
+a.google {
+  font-size: 12px;
+  text-decoration: aqua;
 }
 
 label {
@@ -21,8 +28,54 @@ label {
 } */
 
 form div {
-  margin: 1em;
   display: inline-block;
+}
+
+form.signup > div {
+  display: block;
+}
+form.login > div {
+  width: 100%;
+  display: block;
+}
+img.logo {
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  display: block;
+  margin: 20px auto;
+}
+
+div.signuplogin > h3 {
+  text-align: center;
+  margin: 20px 0px 10px 0px;
+}
+div.signuplogin > a {
+  font-size: 12px;
+  text-align: center;
+}
+
+form.login {
+  justify-content: center;
+  border: 1px solid black;
+  margin: 0px 35%;
+  text-align: center;
+}
+form.signup {
+  border: 1px solid black;
+  margin: 0px 35%;
+}
+
+form.login label {
+  text-align: center;
+}
+
+form.login > div > input {
+  width: 80%;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .navBar {
