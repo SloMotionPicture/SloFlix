@@ -3,19 +3,38 @@
 const db = require('../server/db')
 const {User, Movie, Tag, Transaction} = require('../server/db/models')
 const {userData, movieData, tagData, transactionData} = require('./dummydata')
-
+const scrape = require('./scraping')
+const example = {
+  title: 'Pulp Fiction',
+  year: '(1994)',
+  imageUrl:
+    'https://m.media-amazon.com/images/G/01/imdb/images/nopicture/large/film-184890147._CB470041630_.png',
+  rating: '8.9',
+  certificate: 'R',
+  runtime: '154 min',
+  tags: ['Crime', ' Drama'],
+  summary:
+    "    The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+  cast: ['John Travolta', 'Uma Thurman', 'Samuel L. Jackson', 'Bruce Willis'],
+  director: ['Quentin Tarantino']
+}
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   console.log('starting to seed')
+  const movies = await scrape()
+  console.log('retrieved movies')
 
+  for (const movie of movies) {
+    await Movie.create(movie)
+  }
   for (const user of userData) {
     await User.create(user)
   }
-  for (const movie of movieData) {
-    await Movie.create(movie)
-  }
+  // for (const movie of movieData) {
+  //   await Movie.create(movie)
+  // }
   for (const tag of tagData) {
     await Tag.create(tag)
   }

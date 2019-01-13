@@ -7,8 +7,7 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div className="navBar">
     <Link to="/">
-      <h1>SLOFlix</h1>
-      {isLoggedIn ? <h1>Logged In: {user.email}</h1> : <h1>Logged out</h1>}
+      <img src="./SloFlix_logo.png" />
     </Link>
   </div>
 )

@@ -4,16 +4,20 @@ import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {movieData} from '../../script/dummydata'
 import {addMovieToCart} from '../store/singleMovie'
+import {fetchMovies} from '../store/allMovies'
 class MovieView extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.fetchMovies()
+  }
   render() {
-    const {handleClick} = this.props
-    console.log('RENDER')
+    const {handleClick, movies} = this.props
+    console.log('RENDER', this.props)
     return (
       <div className="movie_View">
         <table>
           <tbody>
-            {movieData.map(movie => {
+            {movies.map(movie => {
+              console.log('URL', movie.imageUrl)
               return (
                 <tr>
                   <Link to={`/movie/${movie.id}`}>
@@ -30,10 +34,13 @@ class MovieView extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {}
+  return {
+    movies: state.allMovies
+  }
 }
 const mapDispatchToProps = dispatch => {
   return {
+    fetchMovies: () => dispatch(fetchMovies()),
     handleClick: movieId => addMovieToCart(movieId)
   }
 }
