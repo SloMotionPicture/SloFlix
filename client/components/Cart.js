@@ -1,18 +1,24 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {Navbar} from './index'
-
-const Cart = () => {
-  console.log('INSIDE')
-  return (
-    <div className="cart">
-      <Navbar />
-      <h3>Shopping Cart</h3>
-      <div />
-    </div>
-  )
+import {fetchMoviesInCart} from '../store/allMovies'
+class Cart extends Component {
+  componentDidMount() {
+    this.props.fetchCart()
+  }
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <div className="cart_View">
+          <h3>Shopping Cart</h3>
+          <div />
+        </div>
+      </div>
+    )
+  }
 }
 
 /**
@@ -26,7 +32,11 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  return {}
+  return {
+    fetchCart: () => {
+      dispatch(fetchMoviesInCart())
+    }
+  }
 }
 
 export default connect(mapState, mapDispatch)(Cart)

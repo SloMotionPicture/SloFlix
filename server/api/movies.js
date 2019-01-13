@@ -26,13 +26,29 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.post('/cart', async (req, res, next) => {
+  try {
+    console.log('CART: ', req.session)
+    // const movies = await Movie.findAllWithArray(req.session.passport.movies)
+    // if (movies) {
+    //   res.send(movies);
+    // }
+    // else {
+    //   res.status(401).send()
+    // }
+  } catch (err) {
+    console.log('ERROR!!')
+    next(err)
+  }
+})
 router.post('/addToCart/:movieId', (req, res, next) => {
   try {
-    if (!req.session.passport.movies) {
-      req.session.passport.movies = []
+    console.log(req.session)
+    if (!req.session.cookie.cart) {
+      req.session.cookie.cart = {movies: []}
     }
-    req.session.passport.movies.push(req.params.movieId)
-    console.log('Current Cart:', req.session.passport)
+    req.session.cookie.cart.movies.push(req.params.movieId)
+    console.log('Current Cart:', req.session)
     req.session.save(err => {
       if (err) {
         console.log(err)

@@ -29,7 +29,6 @@ const SearchBar = ({didChange, didSubmit, handleLogout, isLoggedIn}) => (
       </div>
     ) : (
       <div>
-        <Link to="/cart">View Cart</Link>
         <Link className="login" to="/login">
           <h5>Login/ SignUp</h5>
         </Link>

@@ -19,11 +19,14 @@ class MovieView extends Component {
             {movies.map(movie => {
               console.log('URL', movie.imageUrl)
               return (
-                <tr>
+                <tr className="movie_Cell">
                   <Link to={`/movie/${movie.id}`}>
                     <img src={movie.imageUrl} />
                     <label>{movie.title} </label>
                   </Link>
+                  <div onClick={() => handleClick(movie.id)}>
+                    <h5>Add To Cart</h5>
+                  </div>
                 </tr>
               )
             })}

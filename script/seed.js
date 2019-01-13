@@ -23,18 +23,18 @@ async function seed() {
   console.log('db synced!')
 
   console.log('starting to seed')
-  const movies = await scrape()
-  console.log('retrieved movies')
+  // const movies = await scrape()
+  // console.log('retrieved movies')
 
-  for (const movie of movies) {
-    await Movie.create(movie)
-  }
+  // for (const movie of movies) {
+  //   await Movie.create(movie)
+  // }
   for (const user of userData) {
     await User.create(user)
   }
-  // for (const movie of movieData) {
-  //   await Movie.create(movie)
-  // }
+  for (const movie of movieData) {
+    await Movie.create(movie)
+  }
   for (const tag of tagData) {
     await Tag.create(tag)
   }

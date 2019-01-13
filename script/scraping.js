@@ -7,30 +7,30 @@ let baseURL =
 const $ = cheerio.load(baseURL)
 const dom = new JSDOM($, {runScripts: 'dangerously'})
 
-const start = async () => {
-  const data = await scrapeIt.scrapeHTML(dom, {
-    movies: {
-      listItem: '.lister-item',
-      data: {
-        title: '.lister-item-header>a',
-        year: '.lister-item-year',
-        imageUrl: {
-          selector: '.lister-item-image>a>img',
-          attr: 'src'
-        },
-        rating: '.ipl-rating-widget>.ipl-rating-star>.ipl-rating-star__rating',
-        certificate: '.certificate',
-        runtime: '.runtime',
-        tags: {
-          listItem: '.genre'
-        },
-        summary: '.lister-item-content>p'
-      }
-    }
-  })
-  console.log(data)
-}
-start()
+// const start = async () => {
+//   const data = await scrapeIt.scrapeHTML(dom, {
+//     movies: {
+//       listItem: '.lister-item',
+//       data: {
+//         title: '.lister-item-header>a',
+//         year: '.lister-item-year',
+//         imageUrl: {
+//           selector: '.lister-item-image>a>img',
+//           attr: 'src'
+//         },
+//         rating: '.ipl-rating-widget>.ipl-rating-star>.ipl-rating-star__rating',
+//         certificate: '.certificate',
+//         runtime: '.runtime',
+//         tags: {
+//           listItem: '.genre'
+//         },
+//         summary: '.lister-item-content>p'
+//       }
+//     }
+//   })
+//   console.log(data)
+// }
+// start()
 // To use; import this file into the seed file and call the imported function. A 'for' loop that creates a stream of data will need to be created, when the below function returns the list of 100 movies those movies should start being added to the database, while those movies are being added to the database a new scraping function should be started, when the next 100 movies are returned they should be concatenated onto the end of the array that is initially returned. This will hopefully speed up the seeding process which will be long, be patient.
 // Visual feedback so you don't think you're crazy for this process taking so long
 const tick = start => {

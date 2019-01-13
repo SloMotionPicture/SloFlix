@@ -9,6 +9,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
     <Link to="/">
       <img src="./SloFlix_logo.png" />
     </Link>
+    {isLoggedIn ? <h3>Logged In</h3> : <h3>Logged Out</h3>}
   </div>
 )
 
