@@ -26,18 +26,6 @@ label {
   display: inline-block;
   margin: 1em;
 } */
-
-form div {
-  display: inline-block;
-}
-
-form.signup > div {
-  display: block;
-}
-form.login > div {
-  width: 100%;
-  display: block;
-}
 img.logo {
   border: 1px solid black;
   border-radius: 50%;
@@ -47,31 +35,70 @@ img.logo {
   margin: 20px auto;
 }
 
+form div {
+  display: inline-block;
+  padding: 5px 0px 10px 0px;
+}
+form label {
+  padding: 0px 0px 5px 0px;
+}
+
+form.signup > div {
+  display: block;
+  width: 100%;
+}
+form.login > div {
+  width: 100%;
+  display: block;
+}
+
 div.signuplogin > h3 {
   text-align: center;
   margin: 20px 0px 10px 0px;
 }
 div.signuplogin > a {
-  font-size: 12px;
-  text-align: center;
+  margin: 35%;
+  padding: 2px 1px 40px;
+  font-size: 10px;
 }
 
 form.login {
-  justify-content: center;
   border: 1px solid black;
   margin: 0px 35%;
   text-align: center;
+  padding: 10px 10px;
 }
 form.signup {
+  text-align: center;
   border: 1px solid black;
   margin: 0px 35%;
+  padding: 10px 10px;
 }
 
-form.login label {
+form.login button {
+  width: 70%;
+  height: 30px;
+  background-color: #4caf50;
+  font-size: 20;
+  border: 1px solid #3f9242;
+}
+form.signup button {
+  width: 70%;
+  height: 32px;
+  background-color: rgb(231, 231, 7);
+  border: 1px solid rgb(163, 163, 5);
+}
+
+#create_account {
   text-align: center;
 }
-
 form.login > div > input {
+  width: 80%;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+}
+form.signup > div > input {
   width: 80%;
   justify-content: center;
   margin: 0 auto;
