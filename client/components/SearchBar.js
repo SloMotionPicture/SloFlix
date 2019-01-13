@@ -23,17 +23,16 @@ const SearchBar = ({didChange, didSubmit, handleLogout, isLoggedIn}) => (
     {isLoggedIn ? (
       <div>
         <Link to="/" onClick={handleLogout}>
-          {' '}
-          Logout{' '}
+          <h3>Logout</h3>
         </Link>
       </div>
     ) : (
       <div>
         <Link className="login" to="/login">
-          Login
+          <h5>Login/ SignUp</h5>
         </Link>
-        <Link className="signUp" to="/signup">
-          Sign Up
+        <Link className="view_Cart" to="/cart">
+          <h5>View Cart</h5>
         </Link>
       </div>
     )}
