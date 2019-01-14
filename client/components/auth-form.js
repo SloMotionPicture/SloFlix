@@ -54,7 +54,7 @@ const AuthForm = props => {
               <button type="submit">Create your SLOFlix account</button>
             </div>
           </form>
-          <Link to="/login">Already have an account with SLOFLix?</Link>
+          <Link to="/login">Already have an account with SLOFlix?</Link>
         </div>
       ) : (
         <div className="signuplogin">
@@ -84,7 +84,7 @@ const AuthForm = props => {
           </form>
 
           <h3>---New to SLOFlix?---</h3>
-          <Link to="/signup">Create Account with SLOFLix</Link>
+          <Link to="/signup">Create Account with SLOFlix</Link>
         </div>
       )}
       {error && error.response && <div> {error.response.data} </div>}
