@@ -37,6 +37,7 @@ export const fetchMoviesInCart = () => async dispatch => {
   try {
     const response = await axios.get('/api/movies/cart')
     if (response) {
+      console.log(response)
       dispatch(gotMoviesInCart(response.data.movies))
     }
   } catch (err) {

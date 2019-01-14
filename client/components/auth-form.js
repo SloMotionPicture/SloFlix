@@ -13,7 +13,6 @@ const AuthForm = props => {
 
   return (
     <div>
-      <Navbar />
       {name === 'signup' ? (
         <div className="signuplogin">
           <img className="logo" />

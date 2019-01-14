@@ -13,7 +13,6 @@ class Checkout extends Component {
       <Redirect path="/" />
     ) : (
       <div>
-        <Navbar />
         <div>
           <h5>Checkout</h5>
           <hr />

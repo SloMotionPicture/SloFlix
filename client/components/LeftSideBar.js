@@ -17,7 +17,9 @@ class LeftSideBar extends Component {
           <tbody>
             {tagData.map(tag => (
               <tr key={tag.name}>
-                <Link to={`/${tag.name}`}>{tag.name}</Link>
+                <th>
+                  <Link to={`/${tag.name}`}>{tag.name}</Link>
+                </th>
               </tr>
             ))}
           </tbody>

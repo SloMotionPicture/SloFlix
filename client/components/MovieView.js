@@ -18,16 +18,17 @@ class MovieView extends Component {
         <table>
           <tbody>
             {allMovies.map(movie => {
-              console.log('URL', movie.imageUrl)
               return (
-                <tr className="movie_Cell" key={movie.title}>
-                  <Link to={`/movie/one/${movie.id}`}>
-                    <img src={movie.imageUrl} />
-                    <label>{movie.title} </label>
-                  </Link>
-                  <div onClick={() => handleClick(movie.id - 1)}>
-                    <h5>Add To Cart</h5>
-                  </div>
+                <tr>
+                  <th className="movie_Cell" key={movie.title}>
+                    <Link to={`/movie/one/${movie.id}`}>
+                      <img src={movie.imageUrl} />
+                      <label>{movie.title} </label>
+                    </Link>
+                    <div onClick={() => handleClick(movie.id - 1)}>
+                      <h5>Add To Cart</h5>
+                    </div>
+                  </th>
                 </tr>
               )
             })}

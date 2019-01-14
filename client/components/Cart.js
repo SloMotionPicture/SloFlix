@@ -14,7 +14,6 @@ class Cart extends Component {
     const {cart, checkout} = this.props
     return (
       <div>
-        <Navbar />
         <div className="cart_View">
           <h3>Shopping Cart</h3>
           <Link to="/checkout">

@@ -6,24 +6,23 @@ import {
   LeftSideBar,
   Content,
   Cart,
-  Checkout
+  Checkout,
+  Signup,
+  Login,
+  Main
 } from './components'
 import Routes from './routes'
-import DefaultComponent from './components/DefaultComponent'
 
 const App = () => {
   return (
     <div>
+      <Navbar />
       <Switch>
-        {/* <Navbar />
-      <SearchBar />
-      <LeftSideBar />
-    <Content /> */}
-        <Route exact path="/signup" component={Routes} />
-        <Route exact path="/login" component={Routes} />
+        <Route exact path="/" component={Main} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
-        <Route path="/" component={DefaultComponent} />
       </Switch>
     </div>
   )

@@ -15,6 +15,16 @@ class Navbar extends Component {
         <Link to="/">
           <img src="./SloFlix_logo.png" />
         </Link>
+        <table>
+          <tbody>
+            <tr>
+              <th />
+            </tr>
+          </tbody>
+        </table>
+        <Link className="login" to="/cart">
+          <h5>View Cart</h5>
+        </Link>
         {isLoggedIn ? <h3>Logged In</h3> : <h3>Logged Out</h3>}
       </div>
     )
@@ -25,7 +35,6 @@ class Navbar extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('MAPPED', state)
   return {
     isLoggedIn: !!state.user.id,
     user: state.user
