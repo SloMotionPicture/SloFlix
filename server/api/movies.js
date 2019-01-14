@@ -2,6 +2,7 @@ const router = require('express').Router()
 var Cookies = require('cookies')
 var keys = ['keyboard cat']
 const {Movie} = require('../db/models')
+const {Tag} = require('../db/models')
 module.exports = router
 
 //Finds All Movies
@@ -23,6 +24,24 @@ router.get('/one/:id', async (req, res, next) => {
       }
     })
     res.json(singleMovie)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//Finds movie from tag
+router.get('/:tag', async (req, res, next) => {
+  try {
+    const allMovies = await Movie.findAll({
+      include: [{model: Tag}]
+    })
+    const tagMovies = allMovies.filter(movie => {
+      const tags = movie.tags.map(tagData => {
+        return tagData.dataValues.name
+      })
+      return tags.includes(req.params.tag)
+    })
+    res.send(tagMovies)
   } catch (error) {
     next(error)
   }
