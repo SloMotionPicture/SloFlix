@@ -64,14 +64,14 @@ async function seed() {
     if (page !== 11) {
       console.log('...Starting Page ', page, '...')
       const url = baseURL + page
-      const movies = await scrape(url)
-      for (const movie of movies) {
+      //const movies = await scrape(url)
+      for (const movie of temp) {
         movie.tags.forEach(tag => {
           if (tag[0] === ' ') {
             tag = tag.slice(1, tag.length)
           }
           if (!tags[tag]) {
-            tags[tag] = tag
+            tags[tag] = []
           }
         })
 
@@ -91,7 +91,13 @@ async function seed() {
   //   await Movie.create(movie)
   // }
   for (const tag of Object.keys(tags)) {
-    await Tag.create({name: tag})
+    const tag = await Tag.create({name: tag})
+    for (const movieId of tags[tag]) {
+      await TagMovie.create({
+        movieId,
+        tagId: tag.id
+      })
+    }
   }
 
   for (const transaction of transactionData) {
@@ -101,12 +107,6 @@ async function seed() {
   for (const movieTransaction of movieTransactionJoinData) {
     await MovieTransaction.create(movieTransaction)
   }
-
-  // const TagMovie = db.model('Tag-Movie-Join-Table')
-
-  // for (const tagmovie of TagMovieJoin) {
-  //   await TagMovie.create(tagmovie)
-  // }
 
   console.log(`...seeded successfully...`)
 }

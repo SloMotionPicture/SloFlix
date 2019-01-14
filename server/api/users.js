@@ -1,5 +1,10 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const {
+  verifyCard,
+  createCardObjectWithParams
+} = require('../stripe/stripe-helper')
+
 module.exports = router
 
 //Find All Users
@@ -18,7 +23,7 @@ router.get('/', async (req, res, next) => {
 })
 
 //Find One User
-router.get('/:id', async (req, res, next) => {
+router.get('/one/:id', async (req, res, next) => {
   console.log(req.user)
   try {
     if (req.user.id == req.params.id || req.user.adminStatus) {
@@ -33,5 +38,58 @@ router.get('/:id', async (req, res, next) => {
     }
   } catch (error) {
     next(error)
+  }
+})
+
+router.post('/address', (req, res, next) => {
+  try {
+    console.log('INSIDE', req.body)
+    if (req.user) {
+      const user = User.update(
+        {
+          ...req.body
+        },
+        {
+          where: {
+            id: req.user.id
+          }
+        }
+      )
+      res.send(user)
+    } else {
+      res.send({...req.body})
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+router.post('/verifyCard', async (req, res, next) => {
+  try {
+    const token = await verifyCard(
+      createCardObjectWithParams(req.body),
+      async token => {
+        if (token) {
+          if (req.user) {
+            const user = await User.update(
+              {
+                token
+              },
+              {
+                where: {
+                  id: req.user.id
+                }
+              }
+            )
+            res.send(user)
+          } else {
+            res.send({token})
+          }
+        } else {
+          next(err)
+        }
+      }
+    )
+  } catch (err) {
+    next(err)
   }
 })
