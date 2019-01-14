@@ -19,7 +19,7 @@ const defaultMovies = {
  */
 export const gotMovies = movies => ({type: GET_MOVIES, movies})
 export const gotMoviesInCart = cart => ({type: GET_CART_MOVIES, cart})
-
+export const gotMoviesWithTag = movies => ({type: GOT_MOVIES_WITH_TAG, movies})
 /**
  * THUNK CREATORS
  */
@@ -37,13 +37,14 @@ export const fetchMoviesInCart = () => async dispatch => {
   try {
     const response = await axios.get('/api/movies/cart')
     if (response) {
-      console.log(response)
       dispatch(gotMoviesInCart(response.data.movies))
     }
   } catch (err) {
     console.log(err)
   }
 }
+
+export const fetchMoviesWithTag = tag => async dispatch => {}
 
 /**
  * REDUCER
@@ -56,7 +57,6 @@ export default function(state = defaultMovies, action) {
       let cart = []
       action.cart.map(movieId => {
         const movie = state.allMovies[Number(movieId)]
-        console.log(movie)
         cart.push(movie)
       })
       return {...state, cart}

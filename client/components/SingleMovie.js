@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import React, {Component} from 'react'
 import {fetchOneMovie} from '../store/singleMovie'
-
+import {LeftSideBar} from '../components'
 class SingleMovie extends Component {
   constructor(props) {
     super(props)

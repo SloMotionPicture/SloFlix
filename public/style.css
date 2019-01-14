@@ -111,6 +111,14 @@ form.signup > div > input {
   width: 100vw;
   height: 110px;
 }
+.navBar > table {
+  float: right;
+  display: block;
+}
+.edit_Account {
+  color: white;
+  margin-top: 8px;
+}
 .navBar > h3 {
   float: right;
 }
@@ -127,6 +135,8 @@ form.signup > div > input {
   margin-left: 20px;
 }
 .search_Bar {
+  position: sticky;
+  top: 0;
   background-color: white;
   display: inline-block;
   width: 100vw;
@@ -214,10 +224,12 @@ a.view_Cart > h5 {
   border-radius: 0px;
 }
 .left_Bar {
+  position: sticky;
+  top: 50px;
   background-color: #d9d9d9;
   float: left;
   width: 20%;
-  height: 80vh;
+  height: 92vh;
 }
 .left_Bar > table {
   display: block;
@@ -242,7 +254,7 @@ a.view_Cart > h5 {
   margin-top: 0px;
   background-color: #f2f2f2;
   display: inline-block;
-  width: 70%;
+  width: 80%;
 }
 .movie_View > table > tbody {
   justify-content: center;

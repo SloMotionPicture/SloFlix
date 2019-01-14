@@ -18,14 +18,23 @@ class Navbar extends Component {
         <table>
           <tbody>
             <tr>
-              <th />
+              <th>
+                <Link className="view_Cart" to="/cart">
+                  <h5>View Cart</h5>
+                </Link>
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <Link className="edit_Account" to="/account">
+                  <h5>Edit Account</h5>
+                </Link>
+              </th>
             </tr>
           </tbody>
         </table>
-        <Link className="login" to="/cart">
-          <h5>View Cart</h5>
-        </Link>
-        {isLoggedIn ? <h3>Logged In</h3> : <h3>Logged Out</h3>}
+
+        {/* {isLoggedIn ? <h3>Logged In</h3> : <h3>Logged Out</h3>} */}
       </div>
     )
   }

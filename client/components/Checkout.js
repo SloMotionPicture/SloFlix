@@ -36,9 +36,13 @@ class Checkout extends Component {
                 <input name="firstName" type="text" placeholder="First Name" />
                 <input name="lastName" type="text" placeholder="Last Name" />
               </div>
-              <input name="cardNum" type="text" placeholder="Address" />
-              <input name="exp" type="text" placeholder="City, State ZIP" />
-              <input name="cvc" type="text" placeholder="Phone" />
+              <input name="cardNum" type="text" placeholder="Card Number" />
+              <input
+                name="exp"
+                type="text"
+                placeholder="Expiration (MM/YYYY)"
+              />
+              <input name="cvc" type="text" placeholder="CVC" />
 
               <button type="submit">Use this card</button>
             </form>

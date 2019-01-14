@@ -19,18 +19,62 @@ const {
   TagMovieJoin,
   movieTransactionJoinData
 } = require('./dummydata')
-
+const temp = [
+  {
+    title: 'The Master',
+    year: '(2012)',
+    imageUrl:
+      'https://m.media-amazon.com/images/M/MV5BMTQ2NjQ5MzMwMF5BMl5BanBnXkFtZTcwMjczNTAzOA@@._V1_UY209_CR0,0,140,209_AL_.jpg',
+    rating: '7.1',
+    certificate: 'R',
+    runtime: '138 min',
+    tags: ['Drama'],
+    summary:
+      '    A Naval veteran arrives home from war unsettled and uncertain of his future - until he is tantalized by The Cause and its charismatic leader.',
+    cast: [
+      'Philip Seymour Hoffman',
+      'Joaquin Phoenix',
+      'Amy Adams',
+      'Jesse Plemons'
+    ],
+    director: ['Paul Thomas Anderson']
+  },
+  {
+    title: 'Men in Black 3',
+    year: '(2012)',
+    imageUrl:
+      'https://m.media-amazon.com/images/M/MV5BMTU2NTYxODcwMF5BMl5BanBnXkFtZTcwNDk1NDY0Nw@@._V1_UY209_CR0,0,140,209_AL_.jpg',
+    rating: '6.8',
+    certificate: 'PG-13',
+    runtime: '106 min',
+    tags: ['Action', ' Adventure', ' Comedy'],
+    summary:
+      "    Agent J travels in time to M.I.B.'s early days in 1969 to stop an alien from assassinating his friend Agent K and changing history.",
+    cast: ['Will Smith', 'Tommy Lee Jones', 'Josh Brolin', 'Jemaine Clement'],
+    director: ['Barry Sonnenfeld']
+  }
+]
 async function seed() {
   await db.sync({force: true})
   console.log('...db synced!...')
 
   console.log('...starting to seed...')
+  let tags = {}
   const createStream = async page => {
     if (page !== 11) {
       console.log('...Starting Page ', page, '...')
       const url = baseURL + page
       const movies = await scrape(url)
       for (const movie of movies) {
+        movie.tags.forEach(tag => {
+          if (tag[0] === ' ') {
+            tag = tag.slice(1, tag.length)
+          }
+          if (!tags[tag]) {
+            tags[tag] = tag
+          }
+        })
+
         await Movie.create(movie)
       }
       console.group('...Finished page ', page, '...')
@@ -46,8 +90,8 @@ async function seed() {
   // for (const movie of movieData) {
   //   await Movie.create(movie)
   // }
-  for (const tag of tagData) {
-    await Tag.create(tag)
+  for (const tag of Object.keys(tags)) {
+    await Tag.create({name: tag})
   }
 
   for (const transaction of transactionData) {
@@ -58,11 +102,11 @@ async function seed() {
     await MovieTransaction.create(movieTransaction)
   }
 
-  const TagMovie = db.model('Tag-Movie-Join-Table')
+  // const TagMovie = db.model('Tag-Movie-Join-Table')
 
-  for (const tagmovie of TagMovieJoin) {
-    await TagMovie.create(tagmovie)
-  }
+  // for (const tagmovie of TagMovieJoin) {
+  //   await TagMovie.create(tagmovie)
+  // }
 
   console.log(`...seeded successfully...`)
 }
