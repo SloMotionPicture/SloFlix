@@ -16,25 +16,24 @@ class LeftSideBar extends Component {
         <h2>Genres</h2>
         <table>
           <tbody>
-            {tags.map(tag => (
-              <tr key={tag.name}>
-                <th>
-                  <Link
-                    to={`/${tag.name}`}
-                    onClick={() => handleClick(tag.name)}
-                  >
-                    {tag.name}
-                  </Link>
-                </th>
-              </tr>
-            ))}
+            {tags.map(tag => <TagCell tag={tag} handleClick={handleClick} />)}
           </tbody>
         </table>
       </div>
     )
   }
 }
-
+const TagCell = ({tag, handleClick}) => {
+  return (
+    <tr key={tag.name}>
+      <th>
+        <Link to={`/${tag.name}`} onClick={() => handleClick(tag.name)}>
+          {tag.name}
+        </Link>
+      </th>
+    </tr>
+  )
+}
 const mapStateToProps = state => {
   return {
     tags: state.tags

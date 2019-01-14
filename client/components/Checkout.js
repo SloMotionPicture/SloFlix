@@ -17,35 +17,8 @@ class Checkout extends Component {
           <h5>Checkout</h5>
           <hr />
           <div className="checkout_View">
-            <form className="shipping" onSubmit={event => setAddress(event)}>
-              <div>
-                <input name="firstName" type="text" placeholder="First Name" />
-                <input name="lastName" type="text" placeholder="Last Name" />
-              </div>
-              <input name="addressLine1" type="text" placeholder="Address" />
-              <input
-                name="addressLine2"
-                type="text"
-                placeholder="City, State ZIP"
-              />
-              <input name="phone" type="text" placeholder="Phone" />
-              <button type="submit">Use this address</button>
-            </form>
-            <form className="card" onSubmit={event => verifyCard(event)}>
-              <div>
-                <input name="firstName" type="text" placeholder="First Name" />
-                <input name="lastName" type="text" placeholder="Last Name" />
-              </div>
-              <input name="cardNum" type="text" placeholder="Card Number" />
-              <input
-                name="exp"
-                type="text"
-                placeholder="Expiration (MM/YYYY)"
-              />
-              <input name="cvc" type="text" placeholder="CVC" />
-
-              <button type="submit">Use this card</button>
-            </form>
+            <ShippingForm setAddress={setAddress} />
+            <CardForm verifyCard={verifyCard} />
           </div>
         </div>
       </div>
@@ -53,6 +26,35 @@ class Checkout extends Component {
   }
 }
 
+const ShippingForm = ({setAddress}) => {
+  return (
+    <form className="shipping" onSubmit={event => setAddress(event)}>
+      <div>
+        <input name="firstName" type="text" placeholder="First Name" />
+        <input name="lastName" type="text" placeholder="Last Name" />
+      </div>
+      <input name="addressLine1" type="text" placeholder="Address" />
+      <input name="addressLine2" type="text" placeholder="City, State ZIP" />
+      <input name="phone" type="text" placeholder="Phone" />
+      <button type="submit">Use this address</button>
+    </form>
+  )
+}
+const CardForm = ({verifyCard}) => {
+  return (
+    <form className="card" onSubmit={event => verifyCard(event)}>
+      <div>
+        <input name="firstName" type="text" placeholder="First Name" />
+        <input name="lastName" type="text" placeholder="Last Name" />
+      </div>
+      <input name="cardNum" type="text" placeholder="Card Number" />
+      <input name="exp" type="text" placeholder="Expiration (MM/YYYY)" />
+      <input name="cvc" type="text" placeholder="CVC" />
+
+      <button type="submit">Use this card</button>
+    </form>
+  )
+}
 /**
  * CONTAINER
  */

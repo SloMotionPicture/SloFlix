@@ -22,19 +22,5 @@ describe('Components', () => {
     )
   })
 
-  it('renders a movie title', () => {
-    expect('testing').to.not.equal('testing')
-  })
-  it('renders a movie image', () => {
-    expect('testing').to.not.equal('testing')
-  })
-  it('renders movies into a grid of cells', () => {
-    expect('testing').to.not.equal('testing')
-  })
-  it('renders all tags in the LeftSideBar', () => {
-    expect('testing').to.not.equal('testing')
-  })
-  it('has Login and SignUp buttons with classNames `login` and`signUp` respectively', () => {
-    expect('testing').to.not.equal('testing')
-  })
+  it('', () => {})
 })

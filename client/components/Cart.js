@@ -10,7 +10,6 @@ class Cart extends Component {
     this.props.fetchCart()
   }
   render() {
-    console.log('RENDERING', this.props)
     const {cart, checkout} = this.props
     return (
       <div>
