@@ -51,10 +51,10 @@ const Movie = db.define('movies', {
   }
 })
 Movie.findAllWithArray = async movies => {
-  console.log('findAllWithArray')
-  movies.map(async movieId => {
-    return await Movie.findById(movieId)
-  })
-  return movies
+  try {
+    return movies
+  } catch (err) {
+    console.log(err)
+  }
 }
 module.exports = Movie

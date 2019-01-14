@@ -5,16 +5,21 @@ import axios from 'axios'
  */
 const GET_MOVIES = 'GET_MOVIES'
 const GET_CART_MOVIES = 'GET_CART_MOVIES'
+
 /**
  * INITIAL STATE
  */
-const defaultMovies = []
+const defaultMovies = {
+  allMovies: [],
+  cart: []
+}
 
 /**
  * ACTION CREATORS
  */
 export const gotMovies = movies => ({type: GET_MOVIES, movies})
-export const gotMoviesInCart = movies => ({type: GET_CART_MOVIES, movies})
+export const gotMoviesInCart = cart => ({type: GET_CART_MOVIES, cart})
+
 /**
  * THUNK CREATORS
  */
@@ -27,11 +32,12 @@ export const fetchMovies = () => async dispatch => {
     console.error(err)
   }
 }
+
 export const fetchMoviesInCart = () => async dispatch => {
   try {
-    const response = await axios.post('/api/movies/cart')
+    const response = await axios.get('/api/movies/cart')
     if (response) {
-      dispatch(gotMoviesInCart(response.data))
+      dispatch(gotMoviesInCart(response.data.movies))
     }
   } catch (err) {
     console.log(err)
@@ -44,9 +50,15 @@ export const fetchMoviesInCart = () => async dispatch => {
 export default function(state = defaultMovies, action) {
   switch (action.type) {
     case GET_MOVIES:
-      return action.movies
+      return {...state, allMovies: action.movies}
     case GET_CART_MOVIES:
-      return action.movies
+      let cart = []
+      action.cart.map(movieId => {
+        const movie = state.allMovies[Number(movieId)]
+        console.log(movie)
+        cart.push(movie)
+      })
+      return {...state, cart}
     default:
       return state
   }

@@ -14,11 +14,13 @@ class LeftSideBar extends Component {
       <div className="left_Bar">
         <h2>Tags</h2>
         <table>
-          {tagData.map(tag => (
-            <tr>
-              <Link to={`/${tag.name}`}>{tag.name}</Link>
-            </tr>
-          ))}
+          <tbody>
+            {tagData.map(tag => (
+              <tr key={tag.name}>
+                <Link to={`/${tag.name}`}>{tag.name}</Link>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     )

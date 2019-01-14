@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
 })
 
 //Find one Movie
-router.get('/:id', async (req, res, next) => {
+router.get('/one/:id', async (req, res, next) => {
   try {
     const singleMovie = await Movie.findOne({
       where: {
@@ -26,16 +26,9 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/cart', async (req, res, next) => {
+router.get('/cart', async (req, res, next) => {
   try {
-    console.log('CART: ', req.session)
-    // const movies = await Movie.findAllWithArray(req.session.passport.movies)
-    // if (movies) {
-    //   res.send(movies);
-    // }
-    // else {
-    //   res.status(401).send()
-    // }
+    res.send(req.session.passport)
   } catch (err) {
     console.log('ERROR!!')
     next(err)
@@ -44,10 +37,10 @@ router.post('/cart', async (req, res, next) => {
 router.post('/addToCart/:movieId', (req, res, next) => {
   try {
     console.log(req.session)
-    if (!req.session.cookie.cart) {
-      req.session.cookie.cart = {movies: []}
+    if (!req.session.passport.movies) {
+      req.session.passport.movies = []
     }
-    req.session.cookie.cart.movies.push(req.params.movieId)
+    req.session.passport.movies.push(req.params.movieId)
     console.log('Current Cart:', req.session)
     req.session.save(err => {
       if (err) {

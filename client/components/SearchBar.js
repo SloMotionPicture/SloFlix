@@ -22,9 +22,11 @@ const SearchBar = ({didChange, didSubmit, handleLogout, isLoggedIn}) => (
     </form>
     {isLoggedIn ? (
       <div>
-        <Link to="/cart">View Cart</Link>
-        <Link to="/" onClick={handleLogout}>
-          <h3>Logout</h3>
+        <Link className="view_Cart" to="/" onClick={handleLogout}>
+          <h5>Logout</h5>
+        </Link>
+        <Link className="login" to="/cart">
+          <h5>View Cart</h5>
         </Link>
       </div>
     ) : (
