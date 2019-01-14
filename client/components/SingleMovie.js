@@ -14,9 +14,17 @@ class SingleMovie extends Component {
   }
   render() {
     const {movie} = this.props
+    console.log(movie)
     return movie ? (
-      <div className="movie_View">
-        <h1>Data</h1>
+      <div className="single_movie">
+        <div>
+          <img src={movie.imageUrl} />
+          <h1>{movie.title}</h1>
+          <p>{movie.summary}</p>
+        </div>
+        <div>
+          <h3>Genres</h3>
+        </div>
       </div>
     ) : (
       <div className="movie_View">
