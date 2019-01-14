@@ -44,7 +44,15 @@ export const fetchMoviesInCart = () => async dispatch => {
   }
 }
 
-export const fetchMoviesWithTag = tag => async dispatch => {}
+export const fetchMoviesWithTag = tag => async dispatch => {
+  try {
+    const response = await axios.get(`/api/movies/${tag}`)
+    const action = gotMoviesWithTag(response.data)
+    dispatch(action)
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 /**
  * REDUCER
@@ -60,6 +68,8 @@ export default function(state = defaultMovies, action) {
         cart.push(movie)
       })
       return {...state, cart}
+    case GOT_MOVIES_WITH_TAG:
+      return {...state, allMovies: action.movies}
     default:
       return state
   }

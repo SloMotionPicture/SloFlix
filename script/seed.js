@@ -61,21 +61,27 @@ async function seed() {
   console.log('...starting to seed...')
   let tags = {}
   const createStream = async page => {
-    if (page !== 11) {
+    if (page !== 2) {
       console.log('...Starting Page ', page, '...')
       const url = baseURL + page
       const movies = await scrape(url)
       for (const movie of movies) {
+        console.log(movie)
+        const newMovie = await Movie.create(movie)
         movie.tags.forEach(tag => {
+          console.log(tag)
           if (tag[0] === ' ') {
             tag = tag.slice(1, tag.length)
+            console.log('check for space')
           }
           if (!tags[tag]) {
-            tags[tag] = tag
+            console.log('if no tag key')
+            tags[tag] = [newMovie.id]
+          } else {
+            console.log('there is a tag key')
+            tags[tag].push(newMovie.id)
           }
         })
-
-        await Movie.create(movie)
       }
       console.group('...Finished page ', page, '...')
       await createStream(page + 1)
@@ -83,13 +89,30 @@ async function seed() {
   }
   await createStream(1)
   console.log('...retrieved movies...')
-
+  console.log(tags)
   for (const user of userData) {
     await User.create(user)
   }
-  // for (const movie of movieData) {
-  //   await Movie.create(movie)
+
+  const TagMovie = db.model('Tag-Movie-Join-Table')
+  // TagMovie.findByTag = function(tagStr){
+  //   TagMovie.findAll({
+  //     where: {
+  //       id: tagStr
+  //     }
+  //   })
   // }
+
+  for (const tag of Object.keys(tags)) {
+    const temptag = await Tag.create({name: tag})
+    for (const movieId of tags[tag]) {
+      await TagMovie.create({
+        movieId,
+        tagId: temptag.id
+      })
+    }
+  }
+
   for (const tag of Object.keys(tags)) {
     await Tag.create({name: tag})
   }
@@ -98,14 +121,8 @@ async function seed() {
     await Transaction.create(transaction)
   }
 
-  for (const movieTransaction of movieTransactionJoinData) {
-    await MovieTransaction.create(movieTransaction)
-  }
-
-  // const TagMovie = db.model('Tag-Movie-Join-Table')
-
-  // for (const tagmovie of TagMovieJoin) {
-  //   await TagMovie.create(tagmovie)
+  // for (const movieTransaction of movieTransactionJoinData) {
+  //   await MovieTransaction.create(movieTransaction)
   // }
 
   console.log(`...seeded successfully...`)

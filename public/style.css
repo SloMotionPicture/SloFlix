@@ -297,3 +297,15 @@ a.view_Cart > h5 {
   width: 27%;
   height: 100%;
 }
+.single_movie {
+  background-color: #d9d9d9;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid gray;
+  margin-top: 40px;
+}
+.single_movie img {
+  float: left;
+  margin: 10px 0 0 10px;
+}
