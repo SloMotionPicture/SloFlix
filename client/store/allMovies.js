@@ -5,7 +5,7 @@ import axios from 'axios'
  */
 const GET_MOVIES = 'GET_MOVIES'
 const GET_CART_MOVIES = 'GET_CART_MOVIES'
-
+const GOT_MOVIES_WITH_TAG = 'GOT_MOVIES_WITH_TAGS'
 /**
  * INITIAL STATE
  */
