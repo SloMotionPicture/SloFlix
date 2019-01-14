@@ -72,13 +72,10 @@ async function seed() {
           console.log(tag)
           if (tag[0] === ' ') {
             tag = tag.slice(1, tag.length)
-            console.log('check for space')
           }
           if (!tags[tag]) {
-            console.log('if no tag key')
             tags[tag] = [newMovie.id]
           } else {
-            console.log('there is a tag key')
             tags[tag].push(newMovie.id)
           }
         })
@@ -89,7 +86,6 @@ async function seed() {
   }
   await createStream(1)
   console.log('...retrieved movies...')
-  console.log(tags)
   for (const user of userData) {
     await User.create(user)
   }
@@ -109,16 +105,6 @@ async function seed() {
       await TagMovie.create({
         movieId,
         tagId: temptag.id
-      })
-    }
-  }
-
-  for (const tag of Object.keys(tags)) {
-    const tag = await Tag.create({name: tag})
-    for (const movieId of tags[tag]) {
-      await TagMovie.create({
-        movieId,
-        tagId: tag.id
       })
     }
   }
