@@ -1,18 +1,41 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {Navbar} from './index'
+import {fetchMoviesInCart} from '../store/allMovies'
 
-const Cart = () => {
-  console.log('INSIDE')
-  return (
-    <div className="cart">
-      <Navbar />
-      <h3>Shopping Cart</h3>
-      <div />
-    </div>
-  )
+class Cart extends Component {
+  componentDidMount() {
+    this.props.fetchCart()
+  }
+  render() {
+    const {cart, checkout} = this.props
+    return (
+      <div>
+        <div className="cart_View">
+          <h3>Shopping Cart</h3>
+          <Link to="/checkout">
+            <h3>Checkout</h3>
+          </Link>
+          {cart ? (
+            <div>
+              {cart.map(movie => {
+                return (
+                  <div className="cart_Cell">
+                    <img src={movie.imageUrl} />
+                    <label>{movie.title}</label>
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            <div />
+          )}
+        </div>
+      </div>
+    )
+  }
 }
 
 /**
@@ -21,12 +44,17 @@ const Cart = () => {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    cart: state.allMovies.cart
   }
 }
 
 const mapDispatch = dispatch => {
-  return {}
+  return {
+    fetchCart: () => {
+      dispatch(fetchMoviesInCart())
+    }
+  }
 }
 
 export default connect(mapState, mapDispatch)(Cart)

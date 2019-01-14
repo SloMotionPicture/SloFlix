@@ -1,21 +1,31 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
-import {Navbar, SearchBar, LeftSideBar, Content} from './components'
+import {
+  Navbar,
+  SearchBar,
+  LeftSideBar,
+  Content,
+  Cart,
+  Checkout,
+  Signup,
+  Login,
+  Main,
+  SingleMovie
+} from './components'
 import Routes from './routes'
-import DefaultComponent from './components/DefaultComponent'
 
 const App = () => {
   return (
     <div>
+      <Navbar />
       <Switch>
-        {/* <Navbar />
-      <SearchBar />
-      <LeftSideBar />
-    <Content /> */}
-        <Route exact path="/signup" component={Routes} />
-        <Route exact path="/login" component={Routes} />
-        <Route exact path="/cart" component={Routes} />
-        <Route path="/" component={DefaultComponent} />
+        <Route exact path="/" component={Main} />
+        <Route exact path="/movie/one/:movieId" component={Main} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/:tag" component={Main} />
       </Switch>
     </div>
   )

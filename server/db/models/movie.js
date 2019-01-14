@@ -39,16 +39,25 @@ const Movie = db.define('movies', {
   },
   rentPrice: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
+    defaultValue: 299
   },
   digitalPrice: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
+    defaultValue: 799
   },
   physicalPrice: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
+    defaultValue: 1299
   }
 })
-
+Movie.findAllWithArray = async movies => {
+  try {
+    return movies
+  } catch (err) {
+    console.log(err)
+  }
+}
 module.exports = Movie

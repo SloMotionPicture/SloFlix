@@ -1,4 +1,6 @@
 const router = require('express').Router()
+var Cookies = require('cookies')
+var keys = ['keyboard cat']
 const {Movie} = require('../db/models')
 module.exports = router
 
@@ -13,7 +15,7 @@ router.get('/', async (req, res, next) => {
 })
 
 //Find one Movie
-router.get('/:id', async (req, res, next) => {
+router.get('/one/:id', async (req, res, next) => {
   try {
     const singleMovie = await Movie.findOne({
       where: {
@@ -26,20 +28,27 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.get('/cart', async (req, res, next) => {
+  try {
+    if (!req.cookies.cart) {
+      res.cookie('cart', [], {maxAge: 900000, httpOnly: true})
+    }
+    res.send({movies: req.cookies.cart})
+  } catch (err) {
+    console.log('!!ERROR!!')
+    next(err)
+  }
+})
 router.post('/addToCart/:movieId', (req, res, next) => {
   try {
-    if (!req.session.passport.movies) {
-      req.session.passport.movies = []
+    let cart = req.cookies.cart
+    if (!cart) {
+      res.cookie('cart', [req.params.movieId], {maxAge: 900000, httpOnly: true})
+    } else {
+      cart.push(req.params.movieId)
+      res.cookie('cart', cart, {maxAge: 900000, httpOnly: true})
     }
-    req.session.passport.movies.push(req.params.movieId)
-    console.log('Current Cart:', req.session.passport)
-    req.session.save(err => {
-      if (err) {
-        console.log(err)
-      } else {
-        console.log('Session Saved')
-      }
-    })
+    res.send()
   } catch (err) {
     next(err)
   }

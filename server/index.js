@@ -11,6 +11,7 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+var cookieParser = require('cookie-parser')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -44,7 +45,7 @@ passport.deserializeUser(async (id, done) => {
 const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
-
+  app.use(cookieParser())
   // body parsing middleware
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))
@@ -61,12 +62,16 @@ const createApp = () => {
       saveUninitialized: false
     })
   )
+
   app.use(passport.initialize())
   app.use(passport.session())
-
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
+  app.use('/', (req, res, next) => {
+    console.log('REFRESH', req.session)
+    next()
+  })
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))

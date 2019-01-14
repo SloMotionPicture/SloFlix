@@ -21,7 +21,7 @@ export const getTags = tags => ({
 /**
  * THUNK CREATORS
  */
-export const fetchTags = async dispatch => {
+export const fetchTags = () => async dispatch => {
   try {
     const response = await axios.get('/api/tags')
     const action = getTags(response.data)

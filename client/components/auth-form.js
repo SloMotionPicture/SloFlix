@@ -13,12 +13,11 @@ const AuthForm = props => {
 
   return (
     <div>
-      <Navbar />
       {name === 'signup' ? (
         <div className="signuplogin">
           <img className="logo" />
           <h3>Create Account</h3>
-          <form className="signup" onSubmit={handleSubmit}>
+          <form name="signup" className="signup" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="firstName">
                 <small>First Name:</small>
@@ -54,13 +53,13 @@ const AuthForm = props => {
               <button type="submit">Create your SLOFlix account</button>
             </div>
           </form>
-          <Link to="/login">Already have an account with SLOFLix?</Link>
+          <Link to="/login">Already have an account with SLOFlix?</Link>
         </div>
       ) : (
         <div className="signuplogin">
           <img className="logo" />
           <h3>Sign in to SLOFlix</h3>
-          <form className="login" onSubmit={handleSubmit}>
+          <form name="login" className="login" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email">
                 <small>Email</small>
@@ -84,7 +83,7 @@ const AuthForm = props => {
           </form>
 
           <h3>---New to SLOFlix?---</h3>
-          <Link to="/signup">Create Account with SLOFLix</Link>
+          <Link to="/signup">Create Account with SLOFlix</Link>
         </div>
       )}
       {error && error.response && <div> {error.response.data} </div>}
@@ -121,6 +120,7 @@ const mapDispatch = dispatch => {
     handleSubmit(evt) {
       evt.preventDefault()
       const formName = evt.target.name
+      console.log('HANDLING SUBMIT', formName)
       console.log(formName)
       const email = evt.target.email.value
       const password = evt.target.password.value

@@ -10,7 +10,6 @@ const Content = () => {
         <Route exact path="/" component={MovieView} />
         <Route path="/movie/:movieId" component={SingleMovie} />
       </Switch>
-      <AdView />
     </div>
   )
 }
