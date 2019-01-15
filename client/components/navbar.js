@@ -16,21 +16,25 @@ class Navbar extends Component {
           <img src="./SloFlix_logo.png" />
         </Link>
         <table>
-          <tbody>
+          <tbody className="nav_Options">
             <tr>
               <th>
                 <Link className="view_Cart" to="/cart">
-                  <h5>View Cart</h5>
+                  View Cart
                 </Link>
               </th>
             </tr>
-            <tr>
-              <th>
-                <Link className="edit_Account" to="/account">
-                  <h5>Edit Account</h5>
-                </Link>
-              </th>
-            </tr>
+            {isLoggedIn ? (
+              <tr>
+                <th>
+                  <Link className="edit_Account" to="/account">
+                    Edit Account
+                  </Link>
+                </th>
+              </tr>
+            ) : (
+              <tr />
+            )}
           </tbody>
         </table>
 

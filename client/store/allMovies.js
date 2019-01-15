@@ -55,9 +55,9 @@ export default function(state = defaultMovies, action) {
       return {...state, allMovies: action.movies}
     case GET_CART_MOVIES:
       let cart = []
-      action.cart.map(movieId => {
-        const movie = state.allMovies[Number(movieId)]
-        cart.push(movie)
+      action.cart.map(obj => {
+        const movie = state.allMovies[Number(obj.movieId)]
+        cart.push({...movie, price: obj.price})
       })
       return {...state, cart}
     default:

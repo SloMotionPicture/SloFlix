@@ -66,26 +66,26 @@ const refund = charge => {
 // idempotency_key is created by us and is used for when we don't retrieve a response from stripe and is used to recognize subsequent retries of the same request.
 // We suggest using V4 UUIDs, or another random string with enough entropy to avoid collisions
 // Returns a charge ID that should be stored in the database
-const createChargeToCard = (transaction, callback) => {
+const createChargeToCard = async (transaction, callback) => {
   console.log('...Creating Charge...')
   const tempUUID = uuid()
-  callback(tempUUID)
-  stripe.charges.create(
+  // callback(tempUUID)
+  const response = await stripe.charges.create(
     transaction,
     {idempotency_key: tempUUID},
     (err, chargeObj) => {
-      if (err) {
-        error(err)
-      } else {
-        console.log('...Successful Charge...')
+      if (!err) {
+        console.log('...Successful Charge...', chargeObj.id)
         callback(chargeObj.id)
+      } else {
+        console.log(err)
       }
     }
   )
 }
 
 // Provided a card object and a callback returns a card token id to said callback
-// whichcan be sent to 'createChargeToCard'
+// which can be sent to 'createChargeToCard'
 const verifyCard = (card, callback) => {
   console.log('...Verifying Card...')
   stripe.tokens.create(

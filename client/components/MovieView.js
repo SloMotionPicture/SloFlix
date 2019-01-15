@@ -37,7 +37,11 @@ const MovieCell = ({movie, handleClick}) => {
           <img src={movie.imageUrl} />
           <label>{movie.title} </label>
         </Link>
-        <div onClick={() => handleClick(movie.id - 1)}>
+        <div
+          onClick={() =>
+            handleClick({price: movie.rentPrice, movieId: movie.id - 1})
+          }
+        >
           <h5>Add To Cart</h5>
         </div>
       </th>
@@ -52,7 +56,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchMovies: () => dispatch(fetchMovies()),
-    handleClick: movieId => addMovieToCart(movieId)
+    handleClick: cartObj => addMovieToCart(cartObj)
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MovieView)

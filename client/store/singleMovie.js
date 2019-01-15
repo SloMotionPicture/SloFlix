@@ -8,7 +8,9 @@ const GOT_MOVIES_WITH_TAG = 'GOT_MOVIES_WITH_TAG'
 /**
  * INITIAL STATE
  */
-const defaultSingleMovie = {}
+const defaultSingleMovie = {
+  tag: []
+}
 
 /**
  * ACTION CREATORS
@@ -30,9 +32,9 @@ export const fetchOneMovie = id => {
   }
 }
 
-export const addMovieToCart = async movieId => {
+export const addMovieToCart = async cartObj => {
   try {
-    const response = await axios.post(`/api/movies/addToCart/${movieId}`)
+    await axios.post(`/api/movies/addToCart`, cartObj)
   } catch (err) {
     console.log(err)
   }

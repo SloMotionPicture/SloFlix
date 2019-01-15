@@ -10,7 +10,7 @@ class Checkout extends Component {
   render() {
     const {setAddress, verifyCard, verifiedCard, verifiedAddress} = this.props
     return verifiedCard && verifiedAddress ? (
-      <Redirect path="/" />
+      <Redirect to="/checkout/confirm" />
     ) : (
       <div>
         <div>

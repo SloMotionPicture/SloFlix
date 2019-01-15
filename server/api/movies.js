@@ -39,13 +39,17 @@ router.get('/cart', async (req, res, next) => {
     next(err)
   }
 })
-router.post('/addToCart/:movieId', (req, res, next) => {
+router.post('/addToCart', (req, res, next) => {
   try {
     let cart = req.cookies.cart
-    if (!cart) {
-      res.cookie('cart', [req.params.movieId], {maxAge: 900000, httpOnly: true})
+    if (!cart || cart === 'undefined') {
+      let price
+      res.cookie('cart', [{price: req.body.price, movieId: req.body.movieId}], {
+        maxAge: 900000,
+        httpOnly: true
+      })
     } else {
-      cart.push(req.params.movieId)
+      cart.push({price: req.body.price, movieId: req.body.movieId})
       res.cookie('cart', cart, {maxAge: 900000, httpOnly: true})
     }
     res.send()

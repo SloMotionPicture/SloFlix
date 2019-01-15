@@ -35,3 +35,40 @@ router.get('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+router.post('/address', (req, res, next) => {
+  try {
+    if (req.user) {
+      const user = User.update(
+        {
+          ...req.body
+        },
+        {
+          where: {
+            id: req.user.id
+          }
+        }
+      )
+      res.send(user)
+    } else {
+      res.send({...req.body})
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+router.post('/verifyCard', async (req, res, next) => {
+  try {
+    const token = await verifyCard(
+      createCardObjectWithParams(req.body),
+      async token => {
+        if (token && req.user) {
+          res.cookie('src', token, {maxAge: 900000, httpOnly: true})
+        }
+        res.send(token)
+      }
+    )
+  } catch {
+    next(err)
+  }
+})
