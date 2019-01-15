@@ -70,7 +70,7 @@ router.post('/verifyCard', async (req, res, next) => {
         res.send(token)
       }
     )
-  } catch {
+  } catch (err) {
     next(err)
   }
 })

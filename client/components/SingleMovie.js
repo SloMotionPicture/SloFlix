@@ -16,7 +16,6 @@ class SingleMovie extends Component {
   }
   render() {
     const {movie} = this.props
-    console.log(movie)
     const toDollars = num => {
       let dollars = num / 100
       return dollars.toLocaleString('en-US', {
@@ -40,28 +39,42 @@ class SingleMovie extends Component {
           <div>
             <h4>Genres:</h4>
           </div>
-          {/* Add foreach logic here for get assoc tags */}
           <div className="single_tag_flex">
             {movie.tags.map(tag => {
-              return <p>{tag.name}</p>
+              return <p key={tag.name}>{tag.name}</p>
             })}
           </div>
         </div>
         <div className="single_buttons">
           <button
-            onClick={() => this.props.handleClick(movie.id - 1)}
+            onClick={() =>
+              this.props.handleClick({
+                price: movie.digitalPrice,
+                movieId: movie.id - 1
+              })
+            }
             type="submit"
           >
             Digital - <span>{toDollars(movie.digitalPrice)}</span>
           </button>
           <button
-            onClick={() => this.props.handleClick(movie.id - 1)}
+            onClick={() =>
+              this.props.handleClick({
+                price: movie.rentPrice,
+                movieId: movie.id - 1
+              })
+            }
             type="submit"
           >
             Rent - <span>{toDollars(movie.rentPrice)}</span>
           </button>
           <button
-            onClick={() => this.props.handleClick(movie.id - 1)}
+            onClick={() =>
+              this.props.handleClick({
+                price: movie.physicalPrice,
+                movieId: movie.id - 1
+              })
+            }
             type="submit"
           >
             VHS - <span>{toDollars(movie.physicalPrice)}</span>
