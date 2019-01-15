@@ -31,7 +31,7 @@ router.get('/one/:id', async (req, res, next) => {
 })
 
 //Finds movie from tag
-router.get('tags/:tag', async (req, res, next) => {
+router.get('/tags/:tag', async (req, res, next) => {
   try {
     const allMovies = await Movie.findAll({
       include: [{model: Tag}]
