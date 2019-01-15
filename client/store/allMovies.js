@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GET_MOVIES = 'GET_MOVIES'
 const GET_CART_MOVIES = 'GET_CART_MOVIES'
+const GOT_MOVIES_WITH_TAG = 'GOT_MOVIES_WITH_TAG'
 
 /**
  * INITIAL STATE
@@ -46,7 +47,7 @@ export const fetchMoviesInCart = () => async dispatch => {
 
 export const fetchMoviesWithTag = tag => async dispatch => {
   try {
-    const response = await axios.get(`/api/movies/${tag}`)
+    const response = await axios.get(`/api/movies/tags/${tag}`)
     const action = gotMoviesWithTag(response.data)
     dispatch(action)
   } catch (error) {

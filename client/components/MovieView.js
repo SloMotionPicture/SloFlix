@@ -14,6 +14,7 @@ class MovieView extends Component {
     }
   }
   render() {
+    console.log('RENDERED')
     const {handleClick, data} = this.props
     const {allMovies} = data
     return (

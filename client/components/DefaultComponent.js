@@ -9,6 +9,7 @@ const DefaultComponent = () => {
       <Switch>
         <Route exact path="/" component={MovieView} />
         <Route exact path="/movie/one/:movieId" component={SingleMovie} />
+        <Route exact path="/:tag" component={MovieView} />
       </Switch>
     </div>
   )
