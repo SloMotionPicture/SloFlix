@@ -29,6 +29,7 @@ class SingleMovie extends Component {
         <div className="single_flex">
           <div className="single_image">
             <img src={movie.imageUrl} />
+            <p>User Rating: {movie.rating}</p>
           </div>
           <div className="single_description">
             <h1>{movie.title}</h1>
@@ -47,13 +48,22 @@ class SingleMovie extends Component {
           </div>
         </div>
         <div className="single_buttons">
-          <button type="submit">
+          <button
+            onClick={() => this.props.handleClick(movie.id - 1)}
+            type="submit"
+          >
             Digital - <span>{toDollars(movie.digitalPrice)}</span>
           </button>
-          <button type="submit">
+          <button
+            onClick={() => this.props.handleClick(movie.id - 1)}
+            type="submit"
+          >
             Rent - <span>{toDollars(movie.rentPrice)}</span>
           </button>
-          <button type="submit">
+          <button
+            onClick={() => this.props.handleClick(movie.id - 1)}
+            type="submit"
+          >
             VHS - <span>{toDollars(movie.physicalPrice)}</span>
           </button>
         </div>
@@ -75,7 +85,8 @@ const mapDispatch = dispatch => {
   return {
     fetchSingleMovie: movieId => {
       dispatch(fetchOneMovie(movieId))
-    }
+    },
+    handleClick: movieId => addMovieToCart(movieId)
   }
 }
 
