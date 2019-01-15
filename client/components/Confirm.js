@@ -83,6 +83,7 @@ const Cell = ({movie, rent, purchase}) => {
     </div>
   )
 }
+
 const mapStateToProps = state => {
   return {
     user: state.user,

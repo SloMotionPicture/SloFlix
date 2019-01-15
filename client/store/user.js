@@ -1,6 +1,5 @@
 import axios from 'axios'
 import history from '../history'
-
 /**
  * ACTION TYPES
  */
@@ -9,6 +8,7 @@ const REMOVE_USER = 'REMOVE_USER'
 const VERIFIED_CARD = 'VERIFIED_CARD'
 const VERIFIED_ADDRESS = 'VERIFIED_ADDRESS'
 const CLEAR_TOKEN = 'CLEAR_TOKEN'
+
 /**
  * INITIAL STATE
  */
@@ -75,6 +75,7 @@ export const logout = () => async dispatch => {
 export const setUserAddress = address => async dispatch => {
   try {
     dispatch(verifiedAddress(address))
+
   } catch (err) {
     console.log(err)
   }
@@ -104,6 +105,7 @@ export const placeOrder = tempTransaction => async dispatch => {
     }
   } catch (err) {}
 }
+
 /**
  * REDUCER
  */

@@ -1,5 +1,10 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const {
+  verifyCard,
+  createCardObjectWithParams
+} = require('../stripe/stripe-helper')
+
 module.exports = router
 
 //Find All Users
@@ -18,7 +23,7 @@ router.get('/', async (req, res, next) => {
 })
 
 //Find One User
-router.get('/:id', async (req, res, next) => {
+router.get('/one/:id', async (req, res, next) => {
   console.log(req.user)
   try {
     if (req.user.id == req.params.id || req.user.adminStatus) {
@@ -62,9 +67,6 @@ router.post('/verifyCard', async (req, res, next) => {
     const token = await verifyCard(
       createCardObjectWithParams(req.body),
       async token => {
-        if (token && req.user) {
-          res.cookie('src', token, {maxAge: 900000, httpOnly: true})
-        }
         res.send(token)
       }
     )

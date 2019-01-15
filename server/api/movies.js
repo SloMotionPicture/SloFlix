@@ -2,6 +2,7 @@ const router = require('express').Router()
 var Cookies = require('cookies')
 var keys = ['keyboard cat']
 const {Movie} = require('../db/models')
+const {Tag} = require('../db/models')
 module.exports = router
 
 //Finds All Movies
@@ -18,11 +19,30 @@ router.get('/', async (req, res, next) => {
 router.get('/one/:id', async (req, res, next) => {
   try {
     const singleMovie = await Movie.findOne({
+      include: [{model: Tag}],
       where: {
         id: req.params.id
       }
     })
     res.json(singleMovie)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//Finds movie from tag
+router.get('/tags/:tag', async (req, res, next) => {
+  try {
+    const allMovies = await Movie.findAll({
+      include: [{model: Tag}]
+    })
+    const tagMovies = allMovies.filter(movie => {
+      const tags = movie.tags.map(tagData => {
+        return tagData.dataValues.name
+      })
+      return tags.includes(req.params.tag)
+    })
+    res.send(tagMovies)
   } catch (error) {
     next(error)
   }
@@ -55,5 +75,38 @@ router.post('/addToCart', (req, res, next) => {
     res.send()
   } catch (err) {
     next(err)
+  }
+})
+
+router.get('/search/:value/:type', async (req, res, next) => {
+  try {
+    let movieSearch
+    let newType = req.params.type.toLowerCase()
+    console.log(req.params.value)
+    const newValue = req.params.value
+      .split(' ')
+      .map(value => {
+        value = value[0].toUpperCase() + value.slice(1)
+        return value
+      })
+      .join(' ')
+    console.log(newValue)
+    if (newType === 'title') {
+      movieSearch = await Movie.findAll({
+        where: {
+          [newType]: {$like: '%' + newValue + '%'}
+        }
+      })
+    } else if (newType === 'actor') {
+      newType = 'cast'
+      movieSearch = await Movie.findAll({
+        where: {
+          [newType]: {$contains: [newValue]}
+        }
+      })
+    }
+    res.send(movieSearch)
+  } catch (error) {
+    console.error(error)
   }
 })

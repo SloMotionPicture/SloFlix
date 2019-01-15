@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {movieData} from '../../script/dummydata'
 import {addMovieToCart} from '../store/singleMovie'
 import {fetchMovies} from '../store/allMovies'
+
 class MovieView extends Component {
   componentDidMount() {
     if (this.props.match.params.tag) {
@@ -14,6 +15,7 @@ class MovieView extends Component {
     }
   }
   render() {
+    
     const {handleClick, data} = this.props
     const {allMovies} = data
     return (

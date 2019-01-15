@@ -8,6 +8,10 @@ const db = new Sequelize(
   {
     logging: false
   }
+  // process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
+  // {
+  //   logging: false
+  // }
 )
 module.exports = db
 

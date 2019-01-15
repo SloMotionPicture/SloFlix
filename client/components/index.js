@@ -17,3 +17,4 @@ export {default as Checkout} from './Checkout'
 export {default as Main} from './DefaultComponent'
 export {default as Confirm} from './Confirm'
 export {default as Success} from './Success'
+

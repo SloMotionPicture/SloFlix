@@ -1,5 +1,6 @@
 import React from 'react'
-import {SearchBar, LeftSideBar, MovieView, SingleMovie} from './index'
+import SearchBar from './SearchBarTest'
+import {LeftSideBar, MovieView, SingleMovie} from './index' //SearchBar
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 const DefaultComponent = () => {
   return (
@@ -9,6 +10,7 @@ const DefaultComponent = () => {
       <Switch>
         <Route exact path="/" component={MovieView} />
         <Route exact path="/movie/one/:movieId" component={SingleMovie} />
+        <Route exact path="/:tag" component={MovieView} />
       </Switch>
     </div>
   )
