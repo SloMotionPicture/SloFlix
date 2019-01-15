@@ -17,13 +17,30 @@ class SingleMovie extends Component {
     console.log(movie)
     return movie ? (
       <div className="single_movie">
-        <div>
-          <img src={movie.imageUrl} />
-          <h1>{movie.title}</h1>
-          <p>{movie.summary}</p>
+        <div className="single_flex">
+          <div className="single_image">
+            <img src={movie.imageUrl} />
+          </div>
+          <div className="single_description">
+            <h1>{movie.title}</h1>
+            <p>{movie.summary}</p>
+          </div>
         </div>
-        <div>
-          <h3>Genres</h3>
+        <div className="single_tags">
+          <div>
+            <h4>Genres:</h4>
+          </div>
+          {/* Add foreach logic here for get assoc tags */}
+          <div className="single_tag_flex">
+            <p>Comedy</p>
+            <p>Drama</p>
+            <p>Mystery</p>
+          </div>
+        </div>
+        <div className="single_buttons">
+          <button type="submit">Digital</button>
+          <button type="submit">Rent</button>
+          <button type="submit">VHS</button>
         </div>
       </div>
     ) : (
