@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Axios from 'axios'
 import {logout} from '../store/user'
 
 const SearchBar = ({didChange, didSubmit, handleLogout, isLoggedIn}) => (
@@ -37,11 +36,15 @@ const SearchBar = ({didChange, didSubmit, handleLogout, isLoggedIn}) => (
 )
 const mapStateToProps = state => {
   return {
-    searchValue: '',
+    //searchValue: '',
     user: state.user,
     isLoggedIn: !!state.user.email,
     didChange: event => {
-      searchValue = event.target.value
+      console.log(event)
+      //searchValue = event.target.value
+    },
+    didSubmit: event => {
+      console.log(event)
     }
   }
 }

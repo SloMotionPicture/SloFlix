@@ -73,3 +73,36 @@ router.post('/addToCart/:movieId', (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/search/:value/:type', async (req, res, next) => {
+  try {
+    let movieSearch
+    let newType = req.params.type.toLowerCase()
+    console.log(req.params.value)
+    const newValue = req.params.value
+      .split(' ')
+      .map(value => {
+        value = value[0].toUpperCase() + value.slice(1)
+        return value
+      })
+      .join(' ')
+    console.log(newValue)
+    if (newType === 'title') {
+      movieSearch = await Movie.findAll({
+        where: {
+          [newType]: {$like: '%' + newValue + '%'}
+        }
+      })
+    } else if (newType === 'actor') {
+      newType = 'cast'
+      movieSearch = await Movie.findAll({
+        where: {
+          [newType]: {$contains: [newValue]}
+        }
+      })
+    }
+    res.send(movieSearch)
+  } catch (error) {
+    console.error(error)
+  }
+})

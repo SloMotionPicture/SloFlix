@@ -6,6 +6,7 @@ import axios from 'axios'
 const GET_MOVIES = 'GET_MOVIES'
 const GET_CART_MOVIES = 'GET_CART_MOVIES'
 const GOT_MOVIES_WITH_TAG = 'GOT_MOVIES_WITH_TAG'
+const GOT_MOVIES_FROM_SEARCH = 'GOT_MOVIES_FROM_SEARCH'
 
 /**
  * INITIAL STATE
@@ -21,6 +22,10 @@ const defaultMovies = {
 export const gotMovies = movies => ({type: GET_MOVIES, movies})
 export const gotMoviesInCart = cart => ({type: GET_CART_MOVIES, cart})
 export const gotMoviesWithTag = movies => ({type: GOT_MOVIES_WITH_TAG, movies})
+export const gotMoviesFromSearch = movies => ({
+  type: GOT_MOVIES_FROM_SEARCH,
+  movies
+})
 /**
  * THUNK CREATORS
  */
@@ -55,6 +60,16 @@ export const fetchMoviesWithTag = tag => async dispatch => {
   }
 }
 
+export const fetchSearchMovies = (value, type) => async dispatch => {
+  try {
+    const response = await axios.get(`/api/movies/search/${value}/${type}`)
+    const action = gotMoviesFromSearch(response.data)
+    dispatch(action)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -70,6 +85,8 @@ export default function(state = defaultMovies, action) {
       })
       return {...state, cart}
     case GOT_MOVIES_WITH_TAG:
+      return {...state, allMovies: action.movies}
+    case GOT_MOVIES_FROM_SEARCH:
       return {...state, allMovies: action.movies}
     default:
       return state
