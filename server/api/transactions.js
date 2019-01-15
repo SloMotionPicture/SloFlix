@@ -71,6 +71,7 @@ router.post('/create', async (req, res, next) => {
         if (stripeKey) {
           const transaction = await Transaction.create({
             stripeKey,
+            userId: metadata.userId,
             status: 'Fulfilled'
           })
           if (transaction) {
