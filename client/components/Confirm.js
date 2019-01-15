@@ -32,7 +32,14 @@ class Confirm extends Component {
               <h4>{`Total: ${displayPrice}`}</h4>
             </div>
             {cart.map(movie => {
-              return <Cell movie={movie} rent={rent} purchase={purchase} />
+              return (
+                <Cell
+                  key={movie.title}
+                  movie={movie}
+                  rent={rent}
+                  purchase={purchase}
+                />
+              )
             })}
           </div>
         </div>
@@ -67,7 +74,7 @@ class Confirm extends Component {
 
 const Cell = ({movie, rent, purchase}) => {
   return (
-    <div className="cell" key={movie.title}>
+    <div className="cell">
       <img src={movie.imageUrl} />
       <label>{movie.title}</label>
       <label>{movie.rating}</label>

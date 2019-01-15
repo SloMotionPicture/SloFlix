@@ -61,7 +61,7 @@ async function seed() {
   console.log('...starting to seed...')
   let tags = {}
   const createStream = async page => {
-    if (page !== 2) {
+    if (page !== 91) {
       console.log('...Starting Page ', page, '...')
       const url = baseURL + page
       const movies = await scrape(url)
