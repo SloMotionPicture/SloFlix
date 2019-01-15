@@ -76,12 +76,12 @@ router.post('/create', async (req, res, next) => {
           if (transaction) {
             res.clearCookie('cart')
             res.clearCookie('transaction-pending')
-            res.cookie('cart'), [], {maxAge: 900000, httpOnly: true}
+            res.cookie('cart', [], {maxAge: 900000, httpOnly: true})
             res.send(transaction)
           }
         } else {
           res.clearCookie()
-          res.cookie('cart'), [], {maxAge: 900000, httpOnly: true}
+          res.cookie('cart', [], {maxAge: 900000, httpOnly: true})
           next('Error')
         }
       }

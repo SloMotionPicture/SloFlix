@@ -24,19 +24,17 @@ class Cart extends Component {
               <h3>Checkout</h3>
             </Link>
           )}
-          {cart ? (
+          {cart && (
             <div>
               {cart.map(movie => {
                 return (
-                  <div className="cart_Cell" key={movie.title}>
+                  <div className="cart_Cell" key={movie.imageUrl}>
                     <img src={movie.imageUrl} />
                     <label>{movie.title}</label>
                   </div>
                 )
               })}
             </div>
-          ) : (
-            <div />
           )}
         </div>
       </div>

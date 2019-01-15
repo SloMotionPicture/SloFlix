@@ -75,7 +75,6 @@ export const logout = () => async dispatch => {
 export const setUserAddress = address => async dispatch => {
   try {
     dispatch(verifiedAddress(address))
-
   } catch (err) {
     console.log(err)
   }
@@ -103,7 +102,9 @@ export const placeOrder = tempTransaction => async dispatch => {
       history.push(`/checkout/success/${response.data.stripeKey}`)
       window.location.reload()
     }
-  } catch (err) {}
+  } catch (err) {
+    console.log(error)
+  }
 }
 
 /**

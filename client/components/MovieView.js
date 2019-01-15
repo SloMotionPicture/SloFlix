@@ -15,7 +15,6 @@ class MovieView extends Component {
     }
   }
   render() {
-    
     const {handleClick, data} = this.props
     const {allMovies} = data
     return (
@@ -23,7 +22,11 @@ class MovieView extends Component {
         <table>
           <tbody>
             {allMovies.map(movie => (
-              <MovieCell movie={movie} handleClick={handleClick} />
+              <MovieCell
+                movie={movie}
+                handleClick={handleClick}
+                key={movie.imageUrl}
+              />
             ))}
           </tbody>
         </table>
@@ -34,7 +37,7 @@ class MovieView extends Component {
 const MovieCell = ({movie, handleClick}) => {
   return (
     <tr>
-      <th className="movie_Cell" key={movie.title}>
+      <th className="movie_Cell">
         <Link to={`/movie/one/${movie.id}`}>
           <img src={movie.imageUrl} />
           <label>{movie.title} </label>
