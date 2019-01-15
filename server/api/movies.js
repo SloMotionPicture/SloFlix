@@ -19,6 +19,7 @@ router.get('/', async (req, res, next) => {
 router.get('/one/:id', async (req, res, next) => {
   try {
     const singleMovie = await Movie.findOne({
+      include: [{model: Tag}],
       where: {
         id: req.params.id
       }

@@ -10,7 +10,8 @@ import {
   Signup,
   Login,
   Main,
-  SingleMovie
+  SingleMovie,
+  Confirm
 } from './components'
 import Routes from './routes'
 
