@@ -4,10 +4,10 @@ const stripe = require('stripe')(stripeAPIKey)
 const uuid = require('uuidv4')
 /*
   Work flow of this file is to create a card object using 'createCardObjectWithParams',
-  verify said card object with 'verifyCard', 'verifyCard' sends a card token id to 
-  the specified callback, the card token id should be stored for later use. 
-  When a user clicks the checkout button completing the purchase a transaction object 
-  must be obtained using 'createTransactionObjectWithParams', the returned transaction 
+  verify said card object with 'verifyCard', 'verifyCard' sends a card token id to
+  the specified callback, the card token id should be stored for later use.
+  When a user clicks the checkout button completing the purchase a transaction object
+  must be obtained using 'createTransactionObjectWithParams', the returned transaction
   object can be sent to 'createChargeToCard' along with a callback, the callback for
   'createChargeToCard' is called twice the first time sending the uuid/ idempotency_key
   and the second time sending the charge id back
@@ -115,7 +115,7 @@ const retrieveCard = (cardTokenId, callback) => {
   })
 }
 
-const createCardObjectWithParams = (number, exp_month, exp_year, cvc) => {
+const createCardObjectWithParams = ({number, exp_month, exp_year, cvc}) => {
   return {
     number,
     exp_month,
@@ -142,7 +142,6 @@ const createTransactionObjectWithParams = (
 module.exports = {
   createTransactionObjectWithParams,
   createCardObjectWithParams,
-  chargeCardWithCardObject,
   createChargeToCard,
   retrieveCard,
   verifyCard,

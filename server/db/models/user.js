@@ -73,6 +73,10 @@ const User = db.define('users', {
   adminStatus: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  token: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 })
 
