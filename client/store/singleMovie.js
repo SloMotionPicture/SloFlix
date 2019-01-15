@@ -8,7 +8,9 @@ const GOT_MOVIES_WITH_TAG = 'GOT_MOVIES_WITH_TAG'
 /**
  * INITIAL STATE
  */
-const defaultSingleMovie = {}
+const defaultSingleMovie = {
+  tags: []
+}
 
 /**
  * ACTION CREATORS

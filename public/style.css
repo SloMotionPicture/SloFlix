@@ -335,3 +335,6 @@ a.view_Cart > h5 {
   cursor: pointer;
   outline: none;
 }
+.single_buttons button span {
+  font-size: 12px;
+}
