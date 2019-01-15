@@ -1,3 +1,4 @@
+// OB/MS: it would be good to turn this into explicit documentation somewhere—consider putting this in a unit test
 const tempCard = {
   number: '4242424242424242',
   exp_month: 12,

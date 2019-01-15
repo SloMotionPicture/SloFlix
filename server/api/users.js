@@ -22,6 +22,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// OB/MS: like over in movies, this feels like it could be more standard, RESTful
 //Find One User
 router.get('/one/:id', async (req, res, next) => {
   console.log(req.user)

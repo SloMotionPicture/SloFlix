@@ -42,6 +42,7 @@ describe('Movie routes', () => {
   })
   beforeEach(() => {
     movieData.map(movie => {
+      // OB/MS: async issue below, could use `Promise.all`
       Movie.create(movie)
     })
   })
@@ -50,6 +51,7 @@ describe('Movie routes', () => {
       .get('/api/movies')
       .expect(200)
     expect(res.body).to.be.an('array')
+    // OB/MS: could test that the properties are equal to certain values, or do a `.find` to look for a certain movie in the array
     expect(res.body[0].title).to.be.a('string')
     expect(res.body[0].year).to.be.above(1920)
   }) // end describe('/api/movies')
@@ -86,6 +88,7 @@ describe('Transactions routes', () => {
       movies: [1, 5],
       date: '2019-01-03 04:05:02'
     }
+    // OB/MS: missing `await`
     Transaction.create(singleTransaction)
   })
 

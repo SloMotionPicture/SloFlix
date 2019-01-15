@@ -13,7 +13,8 @@ class Checkout extends Component {
       <div>
         <div>
           <h5>Checkout</h5>
-          {verifiedCard && verifiedAddress ? (
+          {/* OB/MS:                       v could be && */}
+          {verifiedCard && verifiedAddress && (
             <Link className="next" to="/checkout/confirm">
               <div>Next</div>
             </Link>

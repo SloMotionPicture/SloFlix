@@ -5,6 +5,7 @@ module.exports = router
 //Finds All Transactions
 router.get('/', async (req, res, next) => {
   try {
+    // OB/MS: consider making this logic its own method, a Transaction class method `Transaction.getAllForUser(req.user)`, keep route handlers small
     let query = ''
     if (!req.user.adminStatus) {
       query = req.user.id

@@ -78,11 +78,13 @@ export const setUserAddress = address => async dispatch => {
     }
   } catch (err) {
     console.log(err)
+    // OB/MS: consider reporting errors to the user (e.g. alert)
   }
 }
 export const verifyCardData = card => async dispatch => {
   try {
     const response = await axios.post('/api/users/verifyCard', card)
+    // OB/MS: for the query string, axios can generate it from an object if you pass it in as `params`, e.g. `axios.get('/whatever', {params: {someData: 100}}) generates GET /whatever?someData=100
     if (response) {
       dispatch(verifiedCard(response.data))
     }

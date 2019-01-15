@@ -10,6 +10,7 @@ const Transaction = db.define('transactions', {
       notEmpty: true
     }
   },
+  // OB/MS: enums can be sticky, consider `isIn` validator in sequelize
   status: {
     type: Sequelize.ENUM('Pending', 'Closed', 'Fulfilled', 'Refunded')
   }

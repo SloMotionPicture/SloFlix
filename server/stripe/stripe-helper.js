@@ -49,6 +49,7 @@ const error = err => {
 
 // Pass in a charge ID, returns a refund object
 const refund = charge => {
+  // OB/MS: could use async..await
   stripe.refunds.create(
     {
       charge

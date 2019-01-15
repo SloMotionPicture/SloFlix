@@ -53,6 +53,7 @@ const Movie = db.define('movies', {
     defaultValue: 1299
   }
 })
+// OB/MS: dead code
 Movie.findAllWithArray = async movies => {
   try {
     return movies

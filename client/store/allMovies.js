@@ -12,6 +12,7 @@ const GOT_MOVIES_WITH_TAG = 'GOT_MOVIES_WITH_TAG'
  */
 const defaultMovies = {
   allMovies: [],
+  // OB/MS: cart could be its own reducer
   cart: []
 }
 
@@ -63,6 +64,7 @@ export default function(state = defaultMovies, action) {
     case GET_MOVIES:
       return {...state, allMovies: action.movies}
     case GET_CART_MOVIES:
+      // OB/MS: could eager load from the backend, or could use a selector in your `mapStateToProps` to establish cart movie info
       let cart = []
       action.cart.map(movieId => {
         const movie = state.allMovies[Number(movieId)]

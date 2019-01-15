@@ -13,6 +13,7 @@ class Navbar extends Component {
     return (
       <div className="navBar">
         <Link to="/">
+          {/* OB/MS: watch out for relative URLS */}
           <img src="./SloFlix_logo.png" />
         </Link>
         <table>
