@@ -10,19 +10,25 @@ class Cart extends Component {
     this.props.fetchCart()
   }
   render() {
-    const {cart, checkout} = this.props
+    const {cart, checkout, isLoggedIn} = this.props
     return (
       <div>
         <div className="cart_View">
           <h3>Shopping Cart</h3>
-          <Link to="/checkout">
-            <h3>Checkout</h3>
-          </Link>
+          {isLoggedIn ? (
+            <Link to="/checkout">
+              <h3>Checkout</h3>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <h3>Checkout</h3>
+            </Link>
+          )}
           {cart ? (
             <div>
               {cart.map(movie => {
                 return (
-                  <div className="cart_Cell">
+                  <div className="cart_Cell" key={movie.title}>
                     <img src={movie.imageUrl} />
                     <label>{movie.title}</label>
                   </div>

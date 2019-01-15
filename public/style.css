@@ -104,7 +104,39 @@ form.signup > div > input {
   margin: 0 auto;
   text-align: center;
 }
+.success_Screen {
+  border: 1px solid grey;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 300px;
+  height: 150px;
+}
+.success_Screen > label {
+  margin-top: 23px;
+}
+.success {
+  margin-left: -1px;
+  margin-top: -1px;
+  border: 1px solid grey;
 
+  background-color: #44c461;
+  width: 100%;
+  height: 20%;
+}
+.success > label {
+  margin-top: 6px;
+}
+.order_Number {
+  margin-top: -1px;
+  margin-left: -1px;
+  border: 1px solid grey;
+  width: 100%;
+  height: 20%;
+}
+.order_Number > label {
+  margin-top: 6px;
+}
 .navBar {
   margin-top: -21px;
   background-color: #3e3e3e;
@@ -113,7 +145,8 @@ form.signup > div > input {
 }
 .navBar > table {
   float: right;
-  display: block;
+  margin-top: 34px;
+  text-align: right;
 }
 .edit_Account {
   color: white;
@@ -153,6 +186,7 @@ form.signup > div > input {
 
   text-align: center;
 }
+
 .cart_View {
   width: 100vw;
   margin-top: -19px;
@@ -205,6 +239,7 @@ a.login > h5 {
 a.view_Cart {
   width: 120px;
   height: 30px;
+  color: white;
 }
 a.view_Cart > h5 {
   color: white;
@@ -222,6 +257,11 @@ a.view_Cart > h5 {
   height: 25px;
   width: 100px;
   border-radius: 0px;
+}
+.confirm {
+  width: 150px;
+  height: 50px;
+  background-color: yellow;
 }
 .left_Bar {
   position: sticky;

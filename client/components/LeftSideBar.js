@@ -15,8 +15,10 @@ class LeftSideBar extends Component {
       <div className="left_Bar">
         <h2>Genres</h2>
         <table>
-          <tbody>
-            {tags.map(tag => <TagCell tag={tag} handleClick={handleClick} />)}
+          <tbody className="tags">
+            {tags.map(tag => (
+              <TagCell key={tag.name} tag={tag} handleClick={handleClick} />
+            ))}
           </tbody>
         </table>
       </div>
@@ -25,7 +27,7 @@ class LeftSideBar extends Component {
 }
 const TagCell = ({tag, handleClick}) => {
   return (
-    <tr key={tag.name}>
+    <tr>
       <th>
         <Link to={`/${tag.name}`} onClick={() => handleClick(tag.name)}>
           {tag.name}

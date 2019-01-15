@@ -11,7 +11,9 @@ import {
   Login,
   Main,
   SingleMovie,
-  Confirm
+  Confirm,
+  Success
+
 } from './components'
 import Routes from './routes'
 
@@ -25,6 +27,10 @@ const App = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
+
+        <Route exact path="/checkout/confirm" component={Confirm} />
+        <Route exact path="/checkout/success/:chargeId" component={Success} />
+
         <Route path="/" component={Main} />
       </Switch>
     </div>

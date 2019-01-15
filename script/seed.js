@@ -66,7 +66,6 @@ async function seed() {
       const url = baseURL + page
       const movies = await scrape(url)
       for (const movie of movies) {
-        console.log(movie)
         const newMovie = await Movie.create(movie)
         movie.tags.forEach(tag => {
           console.log(tag)
@@ -91,13 +90,6 @@ async function seed() {
   }
 
   const TagMovie = db.model('Tag-Movie-Join-Table')
-  // TagMovie.findByTag = function(tagStr){
-  //   TagMovie.findAll({
-  //     where: {
-  //       id: tagStr
-  //     }
-  //   })
-  // }
 
   for (const tag of Object.keys(tags)) {
     const temptag = await Tag.create({name: tag})

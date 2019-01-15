@@ -43,7 +43,6 @@ router.get('/one/:id', async (req, res, next) => {
 
 router.post('/address', (req, res, next) => {
   try {
-    console.log('INSIDE', req.body)
     if (req.user) {
       const user = User.update(
         {
@@ -68,28 +67,10 @@ router.post('/verifyCard', async (req, res, next) => {
     const token = await verifyCard(
       createCardObjectWithParams(req.body),
       async token => {
-        if (token) {
-          if (req.user) {
-            const user = await User.update(
-              {
-                token
-              },
-              {
-                where: {
-                  id: req.user.id
-                }
-              }
-            )
-            res.send(user)
-          } else {
-            res.send({token})
-          }
-        } else {
-          next(err)
-        }
+        res.send(token)
       }
     )
-  } catch (err) {
+  } catch {
     next(err)
   }
 })

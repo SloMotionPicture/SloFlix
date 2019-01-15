@@ -7,6 +7,8 @@ const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const VERIFIED_CARD = 'VERIFIED_CARD'
 const VERIFIED_ADDRESS = 'VERIFIED_ADDRESS'
+const CLEAR_TOKEN = 'CLEAR_TOKEN'
+
 /**
  * INITIAL STATE
  */
@@ -17,8 +19,9 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const verifiedCard = user => ({type: VERIFIED_CARD, user})
-const verifiedAddress = user => ({type: VERIFIED_ADDRESS, user})
+const verifiedCard = token => ({type: VERIFIED_CARD, token})
+const verifiedAddress = address => ({type: VERIFIED_ADDRESS, address})
+const clearToken = () => ({type: CLEAR_TOKEN})
 /**
  * THUNK CREATORS
  */
@@ -63,6 +66,7 @@ export const logout = () => async dispatch => {
     await axios.delete('/auth/logout')
     dispatch(removeUser())
     history.push('/')
+    window.location.reload()
   } catch (err) {
     console.error(err)
   }
@@ -70,12 +74,8 @@ export const logout = () => async dispatch => {
 
 export const setUserAddress = address => async dispatch => {
   try {
-    console.log('INSIDE', address)
-    const response = await axios.post('/api/users/address', address)
-    console.log('RESPONSE', response)
-    if (response) {
-      dispatch(verifiedAddress(response.data))
-    }
+    dispatch(verifiedAddress(address))
+
   } catch (err) {
     console.log(err)
   }
@@ -91,6 +91,21 @@ export const verifyCardData = card => async dispatch => {
   }
 }
 
+export const placeOrder = tempTransaction => async dispatch => {
+  try {
+    console.log('...Submitting Transaction...')
+    const response = await axios.post(
+      '/api/transactions/create',
+      tempTransaction
+    )
+    if (response) {
+      dispatch(clearToken())
+      history.push(`/checkout/success/${response.data.stripeKey}`)
+      window.location.reload()
+    }
+  } catch (err) {}
+}
+
 /**
  * REDUCER
  */
@@ -103,13 +118,17 @@ export default function(state = defaultUser, action) {
     case VERIFIED_CARD:
       return {
         ...state,
-        ...action.user
+        token: action.token
       }
     case VERIFIED_ADDRESS:
-      console.log('STORE')
       return {
         ...state,
-        ...action.user
+        ...action.address
+      }
+    case CLEAR_TOKEN:
+      state.token = null
+      return {
+        ...state
       }
     default:
       return state
