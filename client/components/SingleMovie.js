@@ -5,6 +5,8 @@ import {logout} from '../store'
 import React, {Component} from 'react'
 import {fetchOneMovie} from '../store/singleMovie'
 import {LeftSideBar} from '../components'
+import {addMovieToCart} from '../store/singleMovie'
+
 class SingleMovie extends Component {
   constructor(props) {
     super(props)
@@ -15,11 +17,19 @@ class SingleMovie extends Component {
   render() {
     const {movie} = this.props
     console.log(movie)
+    const toDollars = num => {
+      let dollars = num / 100
+      return dollars.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      })
+    }
     return movie ? (
       <div className="single_movie">
         <div className="single_flex">
           <div className="single_image">
             <img src={movie.imageUrl} />
+            <p>User Rating: {movie.rating}</p>
           </div>
           <div className="single_description">
             <h1>{movie.title}</h1>
@@ -32,15 +42,30 @@ class SingleMovie extends Component {
           </div>
           {/* Add foreach logic here for get assoc tags */}
           <div className="single_tag_flex">
-            <p>Comedy</p>
-            <p>Drama</p>
-            <p>Mystery</p>
+            {movie.tags.map(tag => {
+              return <p>{tag.name}</p>
+            })}
           </div>
         </div>
         <div className="single_buttons">
-          <button type="submit">Digital</button>
-          <button type="submit">Rent</button>
-          <button type="submit">VHS</button>
+          <button
+            onClick={() => this.props.handleClick(movie.id - 1)}
+            type="submit"
+          >
+            Digital - <span>{toDollars(movie.digitalPrice)}</span>
+          </button>
+          <button
+            onClick={() => this.props.handleClick(movie.id - 1)}
+            type="submit"
+          >
+            Rent - <span>{toDollars(movie.rentPrice)}</span>
+          </button>
+          <button
+            onClick={() => this.props.handleClick(movie.id - 1)}
+            type="submit"
+          >
+            VHS - <span>{toDollars(movie.physicalPrice)}</span>
+          </button>
         </div>
       </div>
     ) : (
@@ -60,7 +85,8 @@ const mapDispatch = dispatch => {
   return {
     fetchSingleMovie: movieId => {
       dispatch(fetchOneMovie(movieId))
-    }
+    },
+    handleClick: movieId => addMovieToCart(movieId)
   }
 }
 

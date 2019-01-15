@@ -13,7 +13,7 @@ class Navbar extends Component {
     return (
       <div className="navBar">
         <Link to="/">
-          <img src="./SloFlix_logo.png" />
+          <img src="/SloFlix_logo.png" />
         </Link>
         <table>
           <tbody>
