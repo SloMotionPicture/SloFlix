@@ -5,8 +5,8 @@ import {Link, Redirect, Switch} from 'react-router-dom'
 import {Navbar} from './index'
 import {fetchMoviesInCart} from '../store/allMovies'
 import {setUserAddress, verifyCardData, placeOrder} from '../store/user'
+
 class Confirm extends Component {
-  componentDidMount() {}
   render() {
     const {cart, user, purchase, rent, placeOrder} = this.props
     let totalPrice = 0

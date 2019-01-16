@@ -5,6 +5,7 @@ import {Link, Redirect} from 'react-router-dom'
 import {Navbar} from './index'
 import {fetchMoviesInCart} from '../store/allMovies'
 import {setUserAddress, verifyCardData} from '../store/user'
+
 class Checkout extends Component {
   componentDidMount() {}
   render() {
@@ -12,17 +13,15 @@ class Checkout extends Component {
     return verifiedCard && verifiedAddress ? (
       <Redirect to="/checkout/confirm" />
     ) : (
-
       <div>
         <div>
           <h5>Checkout</h5>
-          {verifiedCard && verifiedAddress ? (
-            <Link className="next" to="/checkout/confirm">
-              <div>Next</div>
-            </Link>
-          ) : (
-            <div />
-          )}
+          {verifiedCard &&
+            verifiedAddress && (
+              <Link className="next" to="/checkout/confirm">
+                <div>Next</div>
+              </Link>
+            )}
           <hr />
           <div className="checkout_View">
             <ShippingForm setAddress={setAddress} />

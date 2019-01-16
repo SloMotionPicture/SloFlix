@@ -51,42 +51,44 @@ router.get('/:transactionId', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
   try {
-    console.log('...Creating Transaction...')
-    const {amount, description, metadata, status, source} = req.body
-    const cart = res.cookie('cart')
-    res.cookie(
-      'transaction-pending',
-      {amount, source, description, metadata, status},
-      {maxAge: 900000, httpOnly: true}
-    )
-    await createChargeToCard(
-      {
-        amount,
-        source,
-        description,
-        metadata,
-        currency: 'usd'
-      },
-      async stripeKey => {
-        if (stripeKey) {
-          const transaction = await Transaction.create({
-            stripeKey,
-            userId: metadata.userId,
-            status: 'Fulfilled'
-          })
-          if (transaction) {
-            res.clearCookie('cart')
-            res.clearCookie('transaction-pending')
+    if (req.user.id) {
+      console.log('...Creating Transaction...')
+      const {amount, description, metadata, status, source} = req.body
+      const cart = res.cookie('cart')
+      res.cookie(
+        'transaction-pending',
+        {amount, source, description, metadata, status},
+        {maxAge: 900000, httpOnly: true}
+      )
+      await createChargeToCard(
+        {
+          amount,
+          source,
+          description,
+          metadata,
+          currency: 'usd'
+        },
+        async stripeKey => {
+          if (stripeKey) {
+            const transaction = await Transaction.create({
+              stripeKey,
+              userId: metadata.userId,
+              status: 'Fulfilled'
+            })
+            if (transaction) {
+              res.clearCookie('cart')
+              res.clearCookie('transaction-pending')
+              res.cookie('cart', [], {maxAge: 900000, httpOnly: true})
+              res.send(transaction)
+            }
+          } else {
+            res.clearCookie()
             res.cookie('cart', [], {maxAge: 900000, httpOnly: true})
-            res.send(transaction)
+            next('Error')
           }
-        } else {
-          res.clearCookie()
-          res.cookie('cart', [], {maxAge: 900000, httpOnly: true})
-          next('Error')
         }
-      }
-    )
+      )
+    }
   } catch (err) {
     next(err)
   }

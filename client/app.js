@@ -13,7 +13,6 @@ import {
   SingleMovie,
   Confirm,
   Success
-
 } from './components'
 import Routes from './routes'
 
