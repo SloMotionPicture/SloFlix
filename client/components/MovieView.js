@@ -4,12 +4,12 @@ import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {movieData} from '../../script/dummydata'
 import {addMovieToCart} from '../store/singleMovie'
-import {fetchMovies} from '../store/allMovies'
+import {fetchMovies, fetchMoviesWithTag} from '../store/allMovies'
 
 class MovieView extends Component {
   componentDidMount() {
     if (this.props.match.params.tag) {
-      this.props.fetchMovies(this.props.match.params.tag)
+      this.props.fetchMoviesWithTag(this.props.match.params.tag)
     } else {
       this.props.fetchMovies()
     }
@@ -61,7 +61,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchMovies: () => dispatch(fetchMovies()),
-    handleClick: cartObj => addMovieToCart(cartObj)
+    handleClick: cartObj => addMovieToCart(cartObj),
+    fetchMoviesWithTag: tag => dispatch(fetchMoviesWithTag(tag))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MovieView)

@@ -4,15 +4,16 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {me} from '../store/user'
+import {fetchMovies} from '../store/allMovies'
 class Navbar extends Component {
   componentDidMount() {
     this.props.getUser()
   }
   render() {
-    const {handleClick, isLoggedIn, user} = this.props
+    const {handleClick, isLoggedIn, user, reloadAllMovies} = this.props
     return (
       <div className="navBar">
-        <Link to="/">
+        <Link to="/" onClick={reloadAllMovies}>
           <img src="/SloFlix_logo.png" />
         </Link>
         <table>
@@ -59,6 +60,9 @@ const mapDispatch = dispatch => {
     getUser: () => dispatch(me()),
     handleClick() {
       dispatch(logout())
+    },
+    reloadAllMovies() {
+      dispatch(fetchMovies())
     }
   }
 }
