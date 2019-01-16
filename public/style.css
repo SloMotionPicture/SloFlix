@@ -145,7 +145,8 @@ form.signup > div > input {
 }
 .navBar > table {
   float: right;
-  margin-top: 34px;
+  margin-top: 27px;
+  margin-right: 10px;
   text-align: right;
 }
 .edit_Account {
@@ -208,6 +209,24 @@ form.signup > div > input {
 .cart_Cell > img {
   width: 120px;
   height: 176px;
+  margin-top: 11px;
+  margin-left: 10px;
+}
+.div_1 {
+  width: 70%;
+  height: 100%;
+  display: inline-block;
+}
+.div_2 {
+  display: inline-block;
+}
+.remove {
+  height: 25px;
+  background-color: #ff3333;
+}
+.remove > label {
+  color: #262626;
+  text-align: center;
 }
 .checkout_View {
   text-align: center;
@@ -277,10 +296,20 @@ a.view_Cart > h5 {
 .left_Bar > h2 {
   margin-top: 10px;
   text-align: center;
+  color: #0d0d0d;
 }
 .left_Bar > table > tbody > tr > a {
   color: #4d4d4d;
   margin-bottom: 50px;
+}
+.tag_Cell {
+  width: 100%;
+  height: 25px;
+}
+.tag_Cell > a {
+  color: #0d0d0d;
+  float: left;
+  margin-left: 7px;
 }
 .content {
   background-color: white;
@@ -313,13 +342,14 @@ a.view_Cart > h5 {
   height: 176px;
 }
 .movie_Cell > div {
-  background-color: #0099ff;
+  background-color: #ffd150;
   width: 100%;
   height: 30px;
 }
 .movie_Cell > div > h5 {
   margin-top: 5px;
-  color: white;
+  color: black;
+  padding-top: 7px;
 }
 .movie_Cell {
   justify-content: center;

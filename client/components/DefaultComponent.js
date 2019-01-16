@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchBar from './SearchBarTest'
-import {LeftSideBar, MovieView, SingleMovie} from './index' //SearchBar
+import {LeftSideBar, MovieView, SingleMovie} from './index'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 const DefaultComponent = () => {
   return (

@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {me} from '../store/user'
 import {fetchMovies} from '../store/allMovies'
+
 class Navbar extends Component {
   componentDidMount() {
     this.props.getUser()
@@ -25,29 +26,13 @@ class Navbar extends Component {
                 </Link>
               </th>
             </tr>
-            {isLoggedIn ? (
-              <tr>
-                <th>
-                  <Link className="edit_Account" to="/account">
-                    Edit Account
-                  </Link>
-                </th>
-              </tr>
-            ) : (
-              <tr />
-            )}
           </tbody>
         </table>
-
-        {/* {isLoggedIn ? <h3>Logged In</h3> : <h3>Logged Out</h3>} */}
       </div>
     )
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
@@ -68,11 +53,3 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(Navbar)
-
-// /**
-//  * PROP TYPES
-//  */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired
-// }

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {MovieView, AdView, SingleMovie} from '../components'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+
 const Content = () => {
   return (
     <div className="content">

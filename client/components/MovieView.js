@@ -47,7 +47,7 @@ const MovieCell = ({movie, handleClick}) => {
             handleClick({price: movie.rentPrice, movieId: movie.id - 1})
           }
         >
-          <h5>Add To Cart</h5>
+          <h5>Rent</h5>
         </div>
       </th>
     </tr>

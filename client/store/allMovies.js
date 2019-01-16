@@ -7,6 +7,7 @@ const GET_MOVIES = 'GET_MOVIES'
 const GET_CART_MOVIES = 'GET_CART_MOVIES'
 const GOT_MOVIES_WITH_TAG = 'GOT_MOVIES_WITH_TAG'
 const GOT_MOVIES_FROM_SEARCH = 'GOT_MOVIES_FROM_SEARCH'
+const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 
 /**
  * INITIAL STATE
@@ -26,6 +27,7 @@ export const gotMoviesFromSearch = movies => ({
   type: GOT_MOVIES_FROM_SEARCH,
   movies
 })
+export const removedItemFromCart = cart => ({type: REMOVE_FROM_CART, cart})
 /**
  * THUNK CREATORS
  */
@@ -44,6 +46,16 @@ export const fetchMoviesInCart = () => async dispatch => {
     const response = await axios.get('/api/movies/cart')
     if (response) {
       dispatch(gotMoviesInCart(response.data.movies))
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+export const removeFromCart = cartIndex => async dispatch => {
+  try {
+    const response = await axios.delete(`/api/movies/cart/${cartIndex}`)
+    if (response) {
+      dispatch(removedItemFromCart(response.data))
     }
   } catch (err) {
     console.log(err)
@@ -88,6 +100,17 @@ export default function(state = defaultMovies, action) {
       return {...state, allMovies: action.movies}
     case GOT_MOVIES_FROM_SEARCH:
       return {...state, allMovies: action.movies}
+    case REMOVE_FROM_CART:
+      let newCart = []
+      action.cart.map(obj => {
+        const movie = state.allMovies[Number(obj.movieId)]
+        newCart.push({...movie, price: obj.price})
+      })
+      return {
+        ...state,
+        allMovies: state.allMovies,
+        cart: newCart
+      }
     default:
       return state
   }

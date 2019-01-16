@@ -28,7 +28,7 @@ class LeftSideBar extends Component {
 const TagCell = ({tag, handleClick}) => {
   return (
     <tr>
-      <th>
+      <th className="tag_Cell">
         <Link to={`/${tag.name}`} onClick={() => handleClick(tag.name)}>
           {tag.name}
         </Link>

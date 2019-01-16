@@ -21,6 +21,4 @@ describe('Components', () => {
       </Provider>
     )
   })
-
-  it('', () => {})
 })

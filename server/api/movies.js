@@ -59,6 +59,24 @@ router.get('/cart', async (req, res, next) => {
     next(err)
   }
 })
+router.delete('/cart/:index', (req, res, next) => {
+  try {
+    console.log(req.cookies.cart)
+    if (req.cookies.cart) {
+      let cart = req.cookies.cart
+      cart.splice(req.params.index, 1)
+      res.cookie('cart', cart, {
+        maxAge: 900000,
+        httpOnly: true
+      })
+      res.send(cart)
+    } else {
+      res.send()
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
 router.post('/addToCart', (req, res, next) => {
   try {
     let cart = req.cookies.cart
